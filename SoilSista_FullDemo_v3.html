@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soil Sista — Full Demo</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--f:#1a3a2a;--m:#2d6a4f;--l:#52b788;--p:#b7e4c7;--c:#f8f3e8;--a:#e9a825;--r:#c0392b;--sky:#2e86c1;--purple:#6c3483;--tx:#1a2e22;--mu:#6b8070}
+body{font-family:'DM Sans',sans-serif;background:#f0ece2;color:var(--tx);max-width:400px;margin:0 auto;min-height:100vh}
+.demo-nav{display:flex;gap:4px;padding:8px 10px;background:#fff;border-bottom:.5px solid #e0dbd0;position:sticky;top:0;z-index:300}
+.dn{flex:1;padding:7px 4px;border-radius:8px;border:1.5px solid #ddd;background:#fff;font-size:10px;font-weight:700;cursor:pointer;color:var(--mu);font-family:'DM Sans',sans-serif;text-align:center;line-height:1.3;transition:all .14s}
+.dn.on.su{background:var(--sky);border-color:var(--sky);color:#fff}
+.dn.on.fr{background:#e8f5ee;border-color:var(--l);color:#27500A}
+.dn.on.pr{background:var(--f);border-color:var(--f);color:#fff}
+.screen,.pscreen{display:none;padding-bottom:70px}
+.screen.active,.pscreen.active{display:block;animation:fi .2s ease}
+@keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.topbar{background:var(--f);padding:13px 16px 11px;display:flex;align-items:center;justify-content:space-between}
+.topbar.dark{background:#0d2318}
+.farm-name{font-family:'DM Serif Display',serif;font-size:16px;color:#fff}
+.farm-sub{font-size:10px;color:var(--p);margin-top:1px;opacity:.8}
+.avatar{width:32px;height:32px;border-radius:50%;background:rgba(183,228,199,.2);border:1.5px solid rgba(183,228,199,.3);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--p)}
+.pro-badge{background:var(--a);color:#412402;font-size:9px;font-weight:700;padding:2px 6px;border-radius:8px;margin-left:5px;vertical-align:middle}
+.bnav{background:#fff;border-top:.5px solid #e0dbd0;display:flex;padding:7px 0 12px;position:sticky;bottom:0;z-index:200}
+.bn{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:3px 0}
+.bn-em{font-size:18px;opacity:.4}.bn-lbl{font-size:10px;font-weight:600;color:var(--mu)}
+.bn.on .bn-em{opacity:1}.bn.on .bn-lbl{color:var(--f)}
+.pad{padding:14px 14px 0}
+.slabel{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--mu);margin:0 0 8px}
+.section{margin-bottom:14px}
+.card{background:#fff;border-radius:12px;padding:12px 13px;border:.5px solid #e0dbd0}
+.pi{display:flex;gap:9px;align-items:flex-start;padding:6px 0;border-bottom:.5px solid #f8f3e8}
+.pi:last-child{border-bottom:none;padding-bottom:0}.pi:first-child{padding-top:0}
+.pdot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.pdot.u{background:var(--r)}.pdot.a{background:var(--a)}.pdot.g{background:var(--l)}.pdot.b{background:var(--sky)}
+.pi h5{font-size:13px;font-weight:600;color:var(--tx);margin-bottom:1px}
+.pi p{font-size:11px;color:var(--mu);line-height:1.4}
+.auto-lbl{font-size:9px;font-weight:700;color:var(--f);background:#e8f5ee;padding:1px 5px;border-radius:5px;margin-left:4px;vertical-align:middle}
+.badge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:9px}
+.badge.g{background:#e8f5ee;color:#27500A}.badge.a{background:#fef8e7;color:#633806}
+.badge.r{background:#fdecea;color:var(--r)}.badge.b{background:#d6eaf8;color:#154360}
+.cc{background:#fff;border-radius:12px;padding:11px 12px;margin-bottom:7px;border:.5px solid #e0dbd0;cursor:pointer}
+.cc.hl{border-left:3px solid var(--l);border-radius:0 12px 12px 0}
+.cc.ha{border-left:3px solid var(--a);border-radius:0 12px 12px 0}
+.cc.hr{border-left:3px solid var(--r);border-radius:0 12px 12px 0}
+.cc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}
+.cc-left{display:flex;align-items:center;gap:8px}
+.cc-name{font-size:13px;font-weight:600;color:var(--tx)}.cc-sub{font-size:10px;color:var(--mu)}
+.prog-row{display:flex;align-items:center;gap:7px}
+.pb{flex:1;height:4px;background:#f0ece2;border-radius:2px;overflow:hidden}
+.pf{height:100%;border-radius:2px}
+.pf.g{background:var(--l)}.pf.a{background:var(--a)}.pf.r{background:var(--r)}
+.plabel{font-size:10px;color:var(--mu);white-space:nowrap}
+.cc-detail{display:none;margin-top:8px;padding-top:8px;border-top:.5px solid #f0ece2;grid-template-columns:1fr 1fr;gap:6px}
+.cc-detail.open{display:grid}
+.ccd{background:#f8f3e8;border-radius:8px;padding:7px 9px;text-align:center}
+.ccd-n{font-size:13px;font-weight:600;color:var(--f)}.ccd-l{font-size:9px;color:var(--mu);margin-top:1px}
+.add-crop{width:100%;background:#fff;border:2px dashed var(--l);border-radius:12px;padding:12px;display:flex;align-items:center;justify-content:center;gap:9px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;color:var(--m);margin-bottom:8px}
+.ac-plus{width:24px;height:24px;border-radius:50%;background:#e8f5ee;display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--m);flex-shrink:0}
+.mc{background:#fff;border-radius:11px;padding:10px 12px;margin-bottom:7px;border:.5px solid #e0dbd0;display:flex;align-items:center;gap:10px}
+.mc-body{flex:1;min-width:0}.mc-name{font-size:12px;font-weight:600;color:var(--tx);margin-bottom:1px}.mc-note{font-size:10px;color:var(--mu)}
+.mc-r{text-align:right;flex-shrink:0}.mc-price{font-size:13px;font-weight:600;color:var(--f)}
+.trend{font-size:10px;font-weight:700;padding:2px 7px;border-radius:8px;margin-top:2px;display:inline-block}
+.trend.hot{background:#e8f5ee;color:#27500A}.trend.mid{background:#fef8e7;color:#633806}.trend.low{background:#f5f5f5;color:#888}
+.sbar{height:4px;background:#f0ece2;border-radius:2px;overflow:hidden;margin-top:4px}
+.sf{height:100%;border-radius:2px}
+.sf.over{background:var(--r)}.sf.bal{background:var(--l)}.sf.under{background:var(--sky)}
+.schip{font-size:10px;font-weight:700;padding:2px 7px;border-radius:8px;display:inline-block;margin-top:3px}
+.schip.over{background:#fdecea;color:var(--r)}.schip.under{background:#d6eaf8;color:#154360}
+.schip.bal{background:#e8f5ee;color:#27500A}.schip.opp{background:#f5eef8;color:var(--purple)}
+.wx{background:var(--f);padding:12px 16px 12px;margin-bottom:14px}
+.wx.dark{background:#0d2318}
+.wx-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:7px}
+.wx-temp{font-size:28px;font-weight:500;color:#fff;line-height:1}
+.wx-meta{font-size:10px;color:var(--p);margin-top:2px}
+.wx-act{font-size:11px;color:#fff;line-height:1.4;margin-top:3px}
+.wx-act strong{color:var(--a)}
+.wx-4d{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:9px}
+.wxd{background:rgba(255,255,255,.1);border-radius:6px;padding:5px 3px;text-align:center}
+.wxd.now{background:rgba(255,255,255,.2)}
+.wdd{font-size:9px;color:rgba(183,228,199,.7);margin-bottom:1px}
+.wdi{font-size:13px;margin-bottom:1px}.wdt{font-size:10px;font-weight:500;color:#fff}
+.moon-row{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.08);border-radius:7px;padding:7px 10px;cursor:pointer}
+.mr-left{display:flex;align-items:center;gap:7px}
+.mr-em{font-size:15px}.mr-txt{font-size:11px;color:#fff}.mr-sub{font-size:9px;color:var(--p);opacity:.8}
+.tog{width:34px;height:18px;border-radius:9px;background:rgba(255,255,255,.2);position:relative;flex-shrink:0;transition:background .2s}
+.tog.on{background:var(--l)}
+.tog::after{content:'';width:12px;height:12px;border-radius:50%;background:#fff;position:absolute;top:3px;left:3px;transition:left .2s}
+.tog.on::after{left:19px}
+.moon-panel{display:none;background:rgba(255,255,255,.08);border-radius:7px;padding:9px;margin-top:6px}
+.moon-panel.open{display:block}
+.mp-r{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.mp-l{font-size:10px;color:var(--p)}.mp-v{font-size:11px;font-weight:600;color:#fff}
+.mp-advice{font-size:11px;color:var(--a);margin-top:5px;padding-top:5px;border-top:1px solid rgba(255,255,255,.1);line-height:1.4}
+.moon-week{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-top:7px}
+.mw-d{text-align:center}
+.mwd-l{font-size:9px;color:rgba(183,228,199,.6)}.mwd-em{font-size:12px}
+.su-hero{background:var(--f);padding:32px 20px 28px;text-align:center}
+.su-logo{font-family:'DM Serif Display',serif;font-size:24px;color:#fff;margin-bottom:4px}
+.su-logo span{color:var(--p)}
+.su-tag{font-size:11px;color:var(--p);opacity:.85;line-height:1.5}
+.su-body{padding:18px 16px 0}
+.su-body h2{font-size:17px;font-weight:600;color:var(--tx);margin-bottom:4px}
+.su-sub{font-size:12px;color:var(--mu);margin-bottom:16px;line-height:1.5}
+.field{margin-bottom:11px}
+.field label{display:block;font-size:10px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--mu);margin-bottom:5px}
+.field input,.field select{width:100%;padding:11px 12px;border:1.5px solid #ddd;border-radius:10px;font-size:13px;font-family:'DM Sans',sans-serif;color:var(--tx);background:#fff;outline:none}
+.field input:focus{border-color:var(--l)}
+.plan-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:13px}
+.pg-card{background:#fff;border-radius:10px;padding:12px 10px;cursor:pointer;border:1.5px solid #ddd;text-align:center;transition:all .14s}
+.pg-card:hover{border-color:var(--l)}.pg-card.sel{border:2px solid var(--l);background:#f0faf4}
+.pg-card.pro-sel{border:2px solid var(--f);background:#f0fdf4}
+.pg-em{font-size:20px;margin-bottom:5px}.pg-name{font-size:12px;font-weight:600;color:var(--tx);margin-bottom:2px}
+.pg-price{font-size:11px;color:var(--mu)}.pg-feat{font-size:10px;color:var(--mu);margin-top:4px;line-height:1.3}
+.primary-btn{width:100%;background:var(--f);color:#fff;border:none;border-radius:10px;padding:12px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:4px}
+.wa-btn{width:100%;background:#25D366;color:#fff;border:none;border-radius:10px;padding:12px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:7px;margin-top:7px}
+.or-div{display:flex;align-items:center;gap:9px;margin:11px 0}
+.or-line{flex:1;height:1px;background:#e0dbd0}.or-txt{font-size:11px;color:var(--mu)}
+.terms{font-size:10px;color:var(--mu);text-align:center;margin-top:11px;line-height:1.5}
+.otp-row{display:flex;gap:10px;justify-content:center;margin:16px 0}
+.otp-box{width:50px;height:55px;border:1.5px solid #ddd;border-radius:10px;font-size:20px;font-weight:600;text-align:center;font-family:'DM Sans',sans-serif;color:var(--tx);background:#fff;outline:none}
+.resend{font-size:11px;color:var(--mu);text-align:center}
+.resend span{color:var(--m);cursor:pointer}
+.setup-item{display:flex;gap:9px;align-items:center;background:#fff;border-radius:10px;padding:10px 11px;border:.5px solid #e0dbd0;margin-bottom:7px}
+.si-em{font-size:15px;flex-shrink:0}
+.si-h{font-size:13px;font-weight:600;color:var(--tx);margin-bottom:1px}
+.si-p{font-size:11px;color:var(--mu)}
+.skip-btn{width:100%;background:none;color:var(--mu);border:none;padding:8px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:3px}
+.step-bar{display:flex;gap:5px;padding:9px 14px;background:#f8f3e8}
+.sdot{flex:1;height:3px;border-radius:2px;background:#e0dbd0;transition:background .2s}
+.sdot.on{background:var(--f)}
+.su-step{display:none}.su-step.active{display:block}
+.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.tool-card{background:#fff;border-radius:12px;padding:13px 11px;border:.5px solid #e0dbd0;cursor:pointer;text-align:center;transition:all .15s;text-decoration:none;display:block;color:inherit}
+.tool-card:hover{border-color:var(--l);transform:translateY(-1px)}
+.tool-card.locked{opacity:.6;border-style:dashed}
+.tool-card.locked:hover{border-color:#ddd;transform:none}
+.tc-em{font-size:22px;margin-bottom:6px}
+.tc-h{font-size:12px;font-weight:600;color:var(--tx);margin-bottom:2px}
+.tc-p{font-size:10px;color:var(--mu);line-height:1.3}
+.tool-sec{font-size:10px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:var(--mu);margin:14px 0 8px}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.stat{background:var(--c);border-radius:10px;padding:11px 13px;text-align:center}
+.stat-n{font-size:20px;font-weight:600;color:var(--f);line-height:1}.stat-l{font-size:10px;color:var(--mu);margin-top:2px}
+.task-list{background:#fff;border-radius:12px;overflow:hidden;border:.5px solid #e0dbd0;margin-bottom:12px}
+.t-item{padding:10px 13px;border-bottom:.5px solid #f0ece2;display:flex;align-items:center;justify-content:space-between}
+.t-item:last-child{border-bottom:none}
+.t-item h5{font-size:12px;font-weight:600;color:var(--tx);margin-bottom:1px}
+.t-item p{font-size:10px;color:var(--mu)}
+.tv{font-size:12px;font-weight:600}
+.tv.u{color:var(--r)}.tv.a{color:#7a5c1e}.tv.g{color:var(--m)}
+.auto-item{background:#fff;border-radius:10px;padding:10px 12px;border:.5px solid #e0dbd0;display:flex;gap:9px;align-items:flex-start;margin-bottom:6px}
+.auto-item.fired{border-left:3px solid var(--l);border-radius:0 10px 10px 0}
+.auto-item.pending{border-left:3px solid var(--a);border-radius:0 10px 10px 0}
+.auto-item.wa{border-left:3px solid #25D366;border-radius:0 10px 10px 0}
+.ai-ic{font-size:15px;flex-shrink:0;margin-top:1px}
+.ai-h{font-size:12px;font-weight:600;color:var(--tx);margin-bottom:2px}
+.ai-p{font-size:11px;color:var(--mu);line-height:1.4}
+.ai-t{font-size:10px;color:var(--mu);margin-top:2px}
+.lbl{font-size:9px;font-weight:700;padding:1px 5px;border-radius:5px;margin-right:3px}
+.lbl.f{background:#e8f5ee;color:#27500A}.lbl.p{background:#fef8e7;color:#633806}.lbl.w{background:#25D366;color:#fff}
+.insight{background:#fff;border-radius:10px;padding:10px 12px;border:.5px solid #e0dbd0;display:flex;gap:9px;align-items:flex-start;margin-bottom:7px}
+.insight.gap{border-left:3px solid var(--sky);border-radius:0 10px 10px 0}
+.insight.warn{border-left:3px solid var(--a);border-radius:0 10px 10px 0}
+.insight.stop{border-left:3px solid var(--r);border-radius:0 10px 10px 0}
+.ins-ic{font-size:15px;flex-shrink:0;margin-top:1px}
+.ins-h{font-size:12px;font-weight:600;color:var(--tx);margin-bottom:2px}
+.ins-p{font-size:11px;color:var(--mu);line-height:1.4}
+.pro-cta{background:var(--f);border-radius:12px;padding:12px 13px;margin-bottom:14px;display:flex;align-items:center;gap:10px;cursor:pointer}
+.pro-cta h4{font-size:13px;font-weight:600;color:#fff;margin-bottom:2px}
+.pro-cta p{font-size:11px;color:var(--p);line-height:1.3}
+/* PLANNER scoped styles */
+.planner-wrap{background:var(--c);min-height:400px}
+.planner-wrap .hdr{background:var(--f);padding:13px 16px 11px;display:flex;align-items:center;justify-content:space-between}
+.planner-wrap .hdr .logo{font-family:'DM Serif Display',serif;font-size:17px;color:#fff}
+.planner-wrap .hdr .logo span{color:var(--p)}
+.planner-wrap .hdr-sub{font-size:10px;color:var(--p);margin-top:2px;opacity:.8}
+.planner-wrap .back-btn{background:none;border:none;color:var(--p);font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif}
+</style>
+</head>
+<body>
+
+<div class="demo-nav">
+  <button class="dn su" id="dn-su" onclick="setMode('su')">Sign up</button>
+  <button class="dn fr" id="dn-fr" onclick="setMode('fr')">Free</button>
+  <button class="dn pr" id="dn-pr" onclick="setMode('pr')">Pro</button>
+</div>
+
+<!-- ════ SIGN UP ════ -->
+<div class="screen" id="s-signup">
+  <div class="step-bar"><div class="sdot on" id="sd1"></div><div class="sdot" id="sd2"></div><div class="sdot" id="sd3"></div><div class="sdot" id="sd4"></div></div>
+  <div class="su-step active" id="ss1">
+    <div class="su-hero"><div class="su-logo">Soil <span>Sista</span></div><div class="su-tag">Simple. Accurate. Actionable. Reliable.</div></div>
+    <div class="su-body">
+      <h2>Create your account</h2><p class="su-sub">60 seconds. Free to start. No credit card needed.</p>
+      <div class="field"><label>Your name</label><input type="text" value="Renee Clarke"></div>
+      <div class="field"><label>Phone number</label><input type="tel" value="+1 (242) 555-0148"></div>
+      <div class="field"><label>Your island</label><select><option selected>Eleuthera, Bahamas</option><option>Nassau / New Providence</option><option>Antigua</option><option>Barbuda</option></select></div>
+      <div class="or-div"><div class="or-line"></div><span class="or-txt">Choose your plan</span><div class="or-line"></div></div>
+      <div class="plan-grid">
+        <div class="pg-card sel" id="pgf" onclick="selPlan('free')"><div class="pg-em">🌱</div><div class="pg-name">Free</div><div class="pg-price">$0 always</div><div class="pg-feat">Plan · Monitor · Market signals</div></div>
+        <div class="pg-card" id="pgp" onclick="selPlan('pro')"><div class="pg-em">⭐</div><div class="pg-name">Pro</div><div class="pg-price">$12 / month</div><div class="pg-feat">+ WhatsApp · Automations · Full market</div></div>
+      </div>
+      <button class="primary-btn" onclick="suStep(2)">Send verification code →</button>
+      <div class="or-div"><div class="or-line"></div><span class="or-txt">or</span><div class="or-line"></div></div>
+      <button class="wa-btn" onclick="suStep(2)"><span style="font-size:15px">💬</span> Continue with WhatsApp</button>
+      <div class="terms">By signing up you agree to Soil Sista terms and privacy policy.</div>
+    </div>
+  </div>
+  <div class="su-step" id="ss2">
+    <div class="su-hero"><div class="su-logo">Soil <span>Sista</span></div><div class="su-tag">Check your WhatsApp or SMS</div></div>
+    <div class="su-body"><h2>Enter your code</h2><p class="su-sub">Sent to +1 (242) 555-0148. Expires in 10 minutes.</p>
+      <div class="otp-row"><input class="otp-box" maxlength="1" value="4"><input class="otp-box" maxlength="1" value="7"><input class="otp-box" maxlength="1" value="2"><input class="otp-box" maxlength="1" value="1"></div>
+      <div class="resend">Didn't get it? <span>Resend code</span></div>
+      <button class="primary-btn" style="margin-top:14px" onclick="suStep(3)">Verify and continue →</button>
+    </div>
+  </div>
+  <div class="su-step" id="ss3">
+    <div class="su-hero"><div class="su-logo">Soil <span>Sista</span></div><div class="su-tag">Welcome, Renee.</div></div>
+    <div class="su-body"><h2>Set up your farm</h2><p class="su-sub" style="margin-bottom:14px">2 minutes. Everything tailored to your actual farm.</p>
+      <div class="setup-item"><span class="si-em">💧</span><div><div class="si-h">Irrigation type</div><div class="si-p">Drip, overhead, hand — changes every water recommendation</div></div></div>
+      <div class="setup-item"><span class="si-em">🪨</span><div><div class="si-h">Soil type</div><div class="si-p">Limestone, sandy, raised beds — affects nutrients and drainage alerts</div></div></div>
+      <div class="setup-item"><span class="si-em">🌶️</span><div><div class="si-h">What you grow</div><div class="si-p">So alerts and market signals match your actual crops</div></div></div>
+      <button class="primary-btn" onclick="suStep(4)">Set up my farm →</button>
+      <button class="skip-btn" onclick="suStep(4)">Skip — take me to the dashboard</button>
+    </div>
+  </div>
+  <div class="su-step" id="ss4">
+    <div class="su-hero"><div class="su-logo">Soil <span>Sista</span></div><div class="su-tag">Clarke Farm is live.</div></div>
+    <div class="su-body"><h2>You're in.</h2><p class="su-sub" style="margin-bottom:16px">Use the tabs at the top to explore Free and Pro dashboards.</p>
+      <button class="primary-btn" onclick="setMode('fr')" style="margin-bottom:9px">Open Free dashboard →</button>
+      <button class="primary-btn" onclick="setMode('pr')" style="background:#0d2318">Open Pro dashboard →</button>
+      <div style="background:#e8f5ee;border-radius:10px;padding:11px 12px;margin-top:14px;border-left:3px solid var(--l);border-radius:0 10px 10px 0;font-size:12px;color:var(--f);line-height:1.5">Use the <strong>Free</strong> and <strong>Pro</strong> tabs at the top to compare both experiences.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ FREE HOME ════ -->
+<div class="screen" id="s-free-home">
+  <div class="topbar"><div><div class="farm-name">Clarke Farm</div><div class="farm-sub">📍 Eleuthera · Free plan</div></div><div class="avatar">RC</div></div>
+  <div class="pad">
+    <div class="wx">
+      <div class="wx-top"><div><div class="wx-temp">29°</div><div class="wx-meta">Sunny · Dry season · Humidity 58%</div><div class="wx-act" style="margin-top:4px"><strong>Today:</strong> No rain 5 days. Water tomatoes + cucumbers before 9am. Good spray window tonight.</div></div><span style="font-size:24px;flex-shrink:0">☀️</span></div>
+      <div class="wx-4d"><div class="wxd now"><div class="wdd">Now</div><div class="wdi">☀️</div><div class="wdt">29°</div></div><div class="wxd"><div class="wdd">Thu</div><div class="wdi">⛅</div><div class="wdt">28°</div></div><div class="wxd"><div class="wdd">Fri</div><div class="wdi">🌦️</div><div class="wdt">26°</div></div><div class="wxd"><div class="wdd">Sat</div><div class="wdi">🌧️</div><div class="wdt">25°</div></div></div>
+      <div class="moon-row" onclick="toggleMoon('free')"><div class="mr-left"><span class="mr-em">🌒</span><div><div class="mr-txt">Waxing Crescent — good for above-ground crops</div><div class="mr-sub">Tap to see moon calendar</div></div></div><div class="tog" id="moonTogFree"></div></div>
+      <div class="moon-panel" id="moonPanelFree">
+        <div class="mp-r"><span class="mp-l">Phase</span><span class="mp-v">🌒 Waxing Crescent · Day 6 of 29</span></div>
+        <div class="mp-r"><span class="mp-l">Full moon</span><span class="mp-v">March 24</span></div>
+        <div class="mp-advice">🌱 Good phase for leafy greens and above-ground crops. Avoid root vegetables until after full moon.</div>
+        <div class="moon-week" style="margin-top:8px"><div class="mw-d"><div class="mwd-l">Wed</div><div class="mwd-em">🌒</div></div><div class="mw-d"><div class="mwd-l">Thu</div><div class="mwd-em">🌓</div></div><div class="mw-d"><div class="mwd-l">Fri</div><div class="mwd-em">🌓</div></div><div class="mw-d"><div class="mwd-l">Sat</div><div class="mwd-em">🌔</div></div><div class="mw-d"><div class="mwd-l">Sun</div><div class="mwd-em">🌔</div></div><div class="mw-d"><div class="mwd-l">Mon</div><div class="mwd-em">🌕</div></div><div class="mw-d"><div class="mwd-l">Tue</div><div class="mwd-em">🌕</div></div></div>
+      </div>
+    </div>
+    <div class="section"><div class="slabel">Today's priorities</div>
+      <div class="card">
+        <div class="pi"><div class="pdot u"></div><div><h5>Scotch bonnet — harvest now</h5><p>Bed 2 at full colour. Contact buyer before 9am.</p></div></div>
+        <div class="pi"><div class="pdot a"></div><div><h5>Water tomatoes + cucumbers</h5><p>5 days no rain. Deep soak before 9am.</p></div></div>
+        <div class="pi"><div class="pdot g"></div><div><h5>Spray window open tonight</h5><p>Wind 14 mph, no rain 48 hrs. Best whitefly window this week.</p></div></div>
+        <div class="pi"><div class="pdot b"></div><div><h5>Callaloo harvest in 2 days</h5><p>Outer leaves at 5 inches. Let them go one more day.</p></div></div>
+      </div>
+    </div>
+    <div class="section"><div class="slabel">Active crops</div>
+      <button class="add-crop" onclick="window.open('SoilSista_CropPlanner_v4.html','_blank')"><div class="ac-plus">+</div>Add a crop — opens crop planner</button>
+      <div class="cc hr" onclick="toggleExpand(this)"><div class="cc-top"><div class="cc-left"><span style="font-size:18px">🌶️</span><div><div class="cc-name">Scotch Bonnet</div><div class="cc-sub">Beds 2&3 · 144 plants</div></div></div><span class="badge r">Harvest now</span></div><div class="prog-row"><div class="pb"><div class="pf g" style="width:100%"></div></div><span class="plabel" style="color:#27500A">Peak production ✓</span></div><div class="cc-detail"><div class="ccd"><div class="ccd-n">$12–20</div><div class="ccd-l">Price/lb</div></div><div class="ccd"><div class="ccd-n">2–3 wks</div><div class="ccd-l">Shelf life</div></div><div class="ccd"><div class="ccd-n">Morning</div><div class="ccd-l">Harvest only</div></div><div class="ccd"><div class="ccd-n">Never</div><div class="ccd-l">Refrigerate</div></div></div></div>
+      <div class="cc ha" onclick="toggleExpand(this)"><div class="cc-top"><div class="cc-left"><span style="font-size:18px">🌱</span><div><div class="cc-name">Callaloo</div><div class="cc-sub">Bed 1 · 96 plants</div></div></div><span class="badge a">In 2 days</span></div><div class="prog-row"><div class="pb"><div class="pf a" style="width:87%"></div></div><span class="plabel">Day 26 of 30</span></div><div class="cc-detail"><div class="ccd"><div class="ccd-n">$4–7</div><div class="ccd-l">Price/lb</div></div><div class="ccd"><div class="ccd-n">1–2 days</div><div class="ccd-l">Shelf life</div></div><div class="ccd"><div class="ccd-n">Outer</div><div class="ccd-l">Leaves only</div></div><div class="ccd"><div class="ccd-n">Leave 6+</div><div class="ccd-l">On plant</div></div></div></div>
+      <div class="cc hl" onclick="toggleExpand(this)"><div class="cc-top"><div class="cc-left"><span style="font-size:18px">🍅</span><div><div class="cc-name">Tomato (Determinate)</div><div class="cc-sub">Bed 4 · 48 plants</div></div></div><span class="badge g">22 days left</span></div><div class="prog-row"><div class="pb"><div class="pf g" style="width:68%"></div></div><span class="plabel">Day 48 of 70</span></div><div class="cc-detail"><div class="ccd"><div class="ccd-n">$5–10</div><div class="ccd-l">Price/lb</div></div><div class="ccd"><div class="ccd-n">3–7 days</div><div class="ccd-l">Shelf life</div></div><div class="ccd"><div class="ccd-n">Mar 26</div><div class="ccd-l">Last spray</div></div><div class="ccd"><div class="ccd-n">Apr 9</div><div class="ccd-l">First harvest</div></div></div></div>
+    </div>
+    <div class="section"><div class="slabel">Market pulse</div>
+      <div class="mc"><span style="font-size:18px">🌶️</span><div class="mc-body"><div class="mc-name">Scotch Bonnet</div><div class="mc-note">Hotel buyers active</div></div><div class="mc-r"><div class="mc-price">$15/lb</div><span class="trend hot">High demand</span></div></div>
+      <div class="mc"><span style="font-size:18px">🌱</span><div class="mc-body"><div class="mc-name">Callaloo</div><div class="mc-note">Consistent local demand</div></div><div class="mc-r"><div class="mc-price">$5/lb</div><span class="trend mid">Steady</span></div></div>
+      <div class="mc"><span style="font-size:18px">🥬</span><div class="mc-body"><div class="mc-name">Lettuce</div><div class="mc-note">Multiple growers supplying</div></div><div class="mc-r"><div class="mc-price">$4/lb</div><span class="trend low">Caution</span></div></div>
+    </div>
+    <div class="pro-cta" onclick="setMode('pr')"><span style="font-size:18px">🔒</span><div><h4>Upgrade to Pro</h4><p>Automations, WhatsApp advisory, full supply signals, buyer connect</p></div><span style="color:var(--p);font-size:16px;flex-shrink:0">›</span></div>
+  </div>
+  <div class="bnav"><div class="bn on" onclick="navFree('home')"><span class="bn-em">🏠</span><span class="bn-lbl">Home</span></div><div class="bn" onclick="navFree('farm')"><span class="bn-em">🌿</span><span class="bn-lbl">My Farm</span></div><div class="bn" onclick="navFree('tools')"><span class="bn-em">🔧</span><span class="bn-lbl">Tools</span></div><div class="bn" onclick="navFree('market')"><span class="bn-em">📈</span><span class="bn-lbl">Market</span></div></div>
+</div>
+
+<!-- ════ FREE MY FARM ════ -->
+<div class="screen" id="s-free-farm">
+  <div class="topbar"><div><div class="farm-name">Clarke Farm</div><div class="farm-sub">📍 Eleuthera · Free plan</div></div><div class="avatar">RC</div></div>
+  <div class="pad" style="padding-top:14px">
+    <div class="section"><div class="slabel">Season snapshot</div>
+      <div class="stat-grid"><div class="stat"><div class="stat-n">4</div><div class="stat-l">Active crops</div></div><div class="stat"><div class="stat-n">336</div><div class="stat-l">Plants in ground</div></div><div class="stat"><div class="stat-n">☀️ Dry</div><div class="stat-l">Current season</div></div><div class="stat"><div class="stat-n">22 days</div><div class="stat-l">To next harvest</div></div></div>
+    </div>
+    <div class="section"><div class="slabel">This week's tasks</div>
+      <div class="task-list">
+        <div class="t-item"><div><h5>Harvest scotch bonnet</h5><p>Today — Beds 2 & 3</p></div><span class="tv u">Urgent</span></div>
+        <div class="t-item"><div><h5>Water tomatoes + cucumbers</h5><p>Today — before 9am</p></div><span class="tv a">Today</span></div>
+        <div class="t-item"><div><h5>Whitefly spray — tomatoes</h5><p>Tonight — good window</p></div><span class="tv a">Tonight</span></div>
+        <div class="t-item"><div><h5>Callaloo harvest</h5><p>Thursday — Bed 1</p></div><span class="tv g">Thu</span></div>
+        <div class="t-item"><div><h5>Amend Bed 3 after scotch bonnet</h5><p>This week — compost + rest</p></div><span class="tv g">This wk</span></div>
+      </div>
+    </div>
+    <div class="section"><div class="slabel">Bed rotation</div>
+      <div class="task-list">
+        <div class="t-item"><div><h5>Bed 1</h5><p>Callaloo → Beans next</p></div><span class="tv g">Good</span></div>
+        <div class="t-item"><div><h5>Bed 2</h5><p>Scotch bonnet → Legumes next</p></div><span class="tv g">Ready</span></div>
+        <div class="t-item"><div><h5>Bed 3</h5><p>Scotch bonnet → Marigolds + rest</p></div><span class="tv a">Rotate</span></div>
+        <div class="t-item"><div><h5>Bed 4</h5><p>Tomatoes — do not replant here</p></div><span class="tv u">Rest next</span></div>
+        <div class="t-item"><div><h5>Bed 5</h5><p>Cucumbers → Leafy greens after</p></div><span class="tv g">Planned</span></div>
+      </div>
+    </div>
+    <div class="section"><div class="slabel">Season revenue estimate</div>
+      <div class="task-list">
+        <div class="t-item"><div><h5>Scotch Bonnet</h5><p>144 plants</p></div><span class="tv g">$720–1,440</span></div>
+        <div class="t-item"><div><h5>Callaloo</h5><p>96 plants · 8 cuts</p></div><span class="tv g">$480–840</span></div>
+        <div class="t-item"><div><h5>Tomatoes</h5><p>48 plants</p></div><span class="tv g">$576–864</span></div>
+        <div class="t-item" style="background:#f0faf4"><div><h5>Season total</h5><p>All crops</p></div><span class="tv g" style="font-size:14px">$2,064–3,624</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="bnav"><div class="bn" onclick="navFree('home')"><span class="bn-em">🏠</span><span class="bn-lbl">Home</span></div><div class="bn on" onclick="navFree('farm')"><span class="bn-em">🌿</span><span class="bn-lbl">My Farm</span></div><div class="bn" onclick="navFree('tools')"><span class="bn-em">🔧</span><span class="bn-lbl">Tools</span></div><div class="bn" onclick="navFree('market')"><span class="bn-em">📈</span><span class="bn-lbl">Market</span></div></div>
+</div>
+
+<!-- ════ FREE TOOLS ════ -->
+<div class="screen" id="s-free-tools">
+  <div class="topbar"><div><div class="farm-name">Clarke Farm</div><div class="farm-sub">📍 Eleuthera · Free plan</div></div><div class="avatar">RC</div></div>
+  <div class="pad" style="padding-top:14px">
+    <div class="tool-sec">Plan & grow</div>
+    <div class="tools-grid">
+      <div class="tool-card" onclick="window.open('SoilSista_CropPlanner_v4.html','_blank')"><div class="tc-em">📅</div><div class="tc-h">Crop planner</div><div class="tc-p">Seed math, timelines, succession, calendar</div></div>
+      <a class="tool-card" href="SoilSista_FarmGuide_v1.html" target="_blank"><div class="tc-em">🔄</div><div class="tc-h">Farm guide</div><div class="tc-p">Rotation, water, harvest timing, seed saving</div></a>
+    </div>
+    <div class="tool-sec">Identify & manage</div>
+    <div class="tools-grid">
+      <a class="tool-card" href="SoilSista_PestTool_v4.html" target="_blank"><div class="tc-em">🔍</div><div class="tc-h">Pest & disease</div><div class="tc-p">Identify problems + full action plans</div></a>
+      <a class="tool-card" href="SoilSista_PestTool_v4.html" target="_blank"><div class="tc-em">🌿</div><div class="tc-h">Nutrient issues</div><div class="tc-p">Deficiency & toxicity identifier</div></a>
+    </div>
+    <div class="tool-sec">Reference</div>
+    <div class="tools-grid">
+      <a class="tool-card" href="SoilSista_FarmGuide_v1.html" target="_blank"><div class="tc-em">💧</div><div class="tc-h">Water guide</div><div class="tc-p">By crop + season</div></a>
+      <a class="tool-card" href="SoilSista_FarmGuide_v1.html" target="_blank"><div class="tc-em">🌾</div><div class="tc-h">Harvest timing</div><div class="tc-p">Visual cues + post-harvest</div></a>
+      <a class="tool-card" href="SoilSista_FarmGuide_v1.html" target="_blank"><div class="tc-em">🌱</div><div class="tc-h">Seed saving</div><div class="tc-p">What to save, how to do it</div></a>
+    </div>
+    <div class="tool-sec">Pro tools</div>
+    <div class="tools-grid">
+      <div class="tool-card locked"><div class="tc-em">📸</div><div class="tc-h">Photo diagnosis</div><div class="tc-p">🔒 Upload photo, get action plan</div></div>
+      <div class="tool-card locked"><div class="tc-em">🔔</div><div class="tc-h">Spray alerts</div><div class="tc-p">🔒 Pushed to your phone</div></div>
+      <div class="tool-card locked"><div class="tc-em">📊</div><div class="tc-h">Farm records</div><div class="tc-p">🔒 Harvest logs + yield data</div></div>
+      <div class="tool-card locked"><div class="tc-em">🤝</div><div class="tc-h">Buyer connect</div><div class="tc-p">🔒 Direct market access</div></div>
+    </div>
+    <div class="pro-cta" onclick="setMode('pr')" style="margin-top:4px"><span style="font-size:18px">⭐</span><div><h4>Upgrade to Pro</h4><p>Unlock all tools + WhatsApp advisory</p></div><span style="color:var(--p);font-size:16px;flex-shrink:0">›</span></div>
+  </div>
+  <div class="bnav"><div class="bn" onclick="navFree('home')"><span class="bn-em">🏠</span><span class="bn-lbl">Home</span></div><div class="bn" onclick="navFree('farm')"><span class="bn-em">🌿</span><span class="bn-lbl">My Farm</span></div><div class="bn on" onclick="navFree('tools')"><span class="bn-em">🔧</span><span class="bn-lbl">Tools</span></div><div class="bn" onclick="navFree('market')"><span class="bn-em">📈</span><span class="bn-lbl">Market</span></div></div>
+</div>
+
+<!-- ════ FREE MARKET ════ -->
+<div class="screen" id="s-free-market">
+  <div class="topbar"><div><div class="farm-name">Clarke Farm</div><div class="farm-sub">📍 Eleuthera · Free plan</div></div><div class="avatar">RC</div></div>
+  <div class="pad" style="padding-top:14px">
+    <div class="section"><div class="slabel">What buyers want right now</div>
+      <div class="mc"><span style="font-size:18px">🌶️</span><div class="mc-body"><div class="mc-name">Scotch Bonnet</div><div class="mc-note">Hotels restocking — 3 buyers active</div></div><div class="mc-r"><div class="mc-price">$15/lb</div><span class="trend hot">🔥 High</span></div></div>
+      <div class="mc"><span style="font-size:18px">🌿</span><div class="mc-body"><div class="mc-name">Fresh herbs</div><div class="mc-note">Thyme + basil — chef demand up</div></div><div class="mc-r"><div class="mc-price">$10/lb</div><span class="trend hot">🔥 High</span></div></div>
+      <div class="mc"><span style="font-size:18px">🌱</span><div class="mc-body"><div class="mc-name">Callaloo</div><div class="mc-note">Consistent local restaurant demand</div></div><div class="mc-r"><div class="mc-price">$5/lb</div><span class="trend mid">Steady</span></div></div>
+      <div class="mc"><span style="font-size:18px">🧅</span><div class="mc-body"><div class="mc-name">Scallions</div><div class="mc-note">Very low local supply</div></div><div class="mc-r"><div class="mc-price">$6/lb</div><span class="trend hot">Grow this</span></div></div>
+      <div class="mc"><span style="font-size:18px">🥬</span><div class="mc-body"><div class="mc-name">Lettuce</div><div class="mc-note">Multiple growers active</div></div><div class="mc-r"><div class="mc-price">$4/lb</div><span class="trend low">Caution</span></div></div>
+    </div>
+    <div style="background:#e8f5ee;border-radius:10px;padding:10px 12px;margin-bottom:12px;border-left:3px solid var(--l);border-radius:0 10px 10px 0;font-size:11px;color:var(--f);line-height:1.5"><strong>Pro:</strong> Pro cross-references network supply with buyer demand — so you see when supply is rising, when buyers are short, and when the window is open — know exactly when to plant and when to hold.</div>
+    <div class="pro-cta" onclick="setMode('pr')"><span style="font-size:18px">📊</span><div><h4>Pro: Full supply signals</h4><p>Oversupply warnings, gap opportunities, network harvest forecasts</p></div><span style="color:var(--p);font-size:16px;flex-shrink:0">›</span></div>
+  </div>
+  <div class="bnav"><div class="bn" onclick="navFree('home')"><span class="bn-em">🏠</span><span class="bn-lbl">Home</span></div><div class="bn" onclick="navFree('farm')"><span class="bn-em">🌿</span><span class="bn-lbl">My Farm</span></div><div class="bn" onclick="navFree('tools')"><span class="bn-em">🔧</span><span class="bn-lbl">Tools</span></div><div class="bn on" onclick="navFree('market')"><span class="bn-em">📈</span><span class="bn-lbl">Market</span></div></div>
+</div>
+
+<!-- ════ PRO HOME ════ -->
+<div class="screen" id="s-pro-home">
+  <div class="topbar dark"><div><div class="farm-name">Clarke Farm <span class="pro-badge">PRO</span></div><div class="farm-sub">📍 Eleuthera · hyperlocal weather</div></div><div class="avatar">RC</div></div>
+  <div class="pad">
+    <div class="wx dark">
+      <div class="wx-top"><div><div class="wx-temp">29°</div><div class="wx-meta">Sunny · Dry season · Eleuthera (hyperlocal)</div><div class="wx-act" style="margin-top:4px"><strong>Today:</strong> Drip running — no irrigation action. Spray window 6–10pm tonight.</div></div><span style="font-size:24px;flex-shrink:0">☀️</span></div>
+      <div class="wx-4d"><div class="wxd now"><div class="wdd">Now</div><div class="wdi">☀️</div><div class="wdt">29°</div></div><div class="wxd"><div class="wdd">Thu</div><div class="wdi">⛅</div><div class="wdt">28°</div></div><div class="wxd"><div class="wdd">Fri</div><div class="wdi">🌦️</div><div class="wdt">26°</div></div><div class="wxd"><div class="wdd">Sat</div><div class="wdi">🌧️</div><div class="wdt">25°</div></div></div>
+      <div class="moon-row" onclick="toggleMoon('pro')"><div class="mr-left"><span class="mr-em">🌒</span><div><div class="mr-txt">Waxing Crescent — good for above-ground crops</div><div class="mr-sub">Tap to expand moon calendar</div></div></div><div class="tog" id="moonTogPro"></div></div>
+      <div class="moon-panel" id="moonPanelPro">
+        <div class="mp-r"><span class="mp-l">Phase</span><span class="mp-v">🌒 Waxing Crescent · Day 6 of 29</span></div>
+        <div class="mp-r"><span class="mp-l">Best for</span><span class="mp-v">Leafy greens, herbs</span></div>
+        <div class="mp-r"><span class="mp-l">Callaloo succession</span><span class="mp-v" style="color:var(--a)">Mar 21 — moon optimal ✓</span></div>
+        <div class="mp-advice">⭐ Pro: Succession date auto-adjusted in your calendar. Bed amendment reminder set 7 days before.</div>
+        <div class="moon-week" style="margin-top:8px"><div class="mw-d"><div class="mwd-l">Wed</div><div class="mwd-em">🌒</div></div><div class="mw-d"><div class="mwd-l">Thu</div><div class="mwd-em">🌓</div></div><div class="mw-d"><div class="mwd-l">Fri</div><div class="mwd-em">🌓</div></div><div class="mw-d"><div class="mwd-l">Sat</div><div class="mwd-em">🌔</div></div><div class="mw-d"><div class="mwd-l">Sun</div><div class="mwd-em">🌔</div></div><div class="mw-d"><div class="mwd-l">Mon</div><div class="mwd-em">🌕</div></div><div class="mw-d"><div class="mwd-l">Tue</div><div class="mwd-em">🌕</div></div></div>
+      </div>
+    </div>
+    <div class="section"><div class="slabel">Today's priorities</div>
+      <div class="card">
+        <div class="pi"><div class="pdot u"></div><div><h5>Scotch bonnet — harvest now <span class="auto-lbl">AUTO</span></h5><p>Day 98. Buyer alert sent to 3 contacts at 6am automatically.</p></div></div>
+        <div class="pi"><div class="pdot g"></div><div><h5>Drip running — no action needed <span class="auto-lbl">AUTO</span></h5><p>Drip confirmed active. Pause reminder set Thursday evening before Friday rain.</p></div></div>
+        <div class="pi"><div class="pdot a"></div><div><h5>Spray window alert — 6pm tonight <span class="auto-lbl">AUTO</span></h5><p>WhatsApp reminder scheduled 5:30pm. Pyrethrin approved for Beds 4 & 5.</p></div></div>
+        <div class="pi"><div class="pdot b"></div><div><h5>Callaloo succession — March 21</h5><p>Moon-optimised. Bed amendment: light compost + fish emulsion. Calendar updated.</p></div></div>
+      </div>
+    </div>
+    <div class="section"><div class="slabel">Active crops</div>
+      <button class="add-crop" style="border-color:#0d2318;color:#0d2318" onclick="window.open('SoilSista_CropPlanner_v4.html','_blank')"><div class="ac-plus" style="background:#e8f5ee">+</div>Add a crop — opens crop planner</button>
+      <div class="cc hr" onclick="toggleExpand(this)"><div class="cc-top"><div class="cc-left"><span style="font-size:18px">🌶️</span><div><div class="cc-name">Scotch Bonnet</div><div class="cc-sub">Beds 2&3 · 144 plants · Drip</div></div></div><span class="badge r">Peak production</span></div><div class="prog-row"><div class="pb"><div class="pf g" style="width:100%"></div></div><span class="plabel" style="color:#27500A">Day 98 — harvest window open</span></div><div class="cc-detail"><div class="ccd"><div class="ccd-n">$12–20</div><div class="ccd-l">Price/lb</div></div><div class="ccd"><div class="ccd-n">Est. $1,728</div><div class="ccd-l">Season revenue</div></div><div class="ccd"><div class="ccd-n">3 buyers</div><div class="ccd-l">Notified today</div></div><div class="ccd"><div class="ccd-n">HE: Apr 5</div><div class="ccd-l">Harvest end</div></div></div></div>
+      <div class="cc ha" onclick="toggleExpand(this)"><div class="cc-top"><div class="cc-left"><span style="font-size:18px">🌱</span><div><div class="cc-name">Callaloo</div><div class="cc-sub">Bed 1 · 96 plants · Hand water</div></div></div><span class="badge a">In 2 days</span></div><div class="prog-row"><div class="pb"><div class="pf a" style="width:87%"></div></div><span class="plabel">Peak production · Day 26 of 30</span></div><div class="cc-detail"><div class="ccd"><div class="ccd-n">$4–7</div><div class="ccd-l">Price/lb</div></div><div class="ccd"><div class="ccd-n">Mar 21</div><div class="ccd-l">Succession ✓</div></div><div class="ccd"><div class="ccd-n">8–12 cuts</div><div class="ccd-l">This season</div></div><div class="ccd"><div class="ccd-n">Est. $660</div><div class="ccd-l">Season revenue</div></div></div></div>
+    </div>
+    <div class="section"><div class="slabel">Market signals — supply & demand</div>
+      <div class="mc"><span style="font-size:18px">🌶️</span><div class="mc-body"><div class="mc-name">Scotch Bonnet</div><div class="mc-note">Low supply · 3 hotel buyers active → strong window</div><div class="sbar"><div class="sf under" style="width:30%"></div></div></div><div class="mc-r"><div class="mc-price">$15/lb</div><span class="schip under">Gap — sell now</span></div></div>
+      <div class="mc"><span style="font-size:18px">🌱</span><div class="mc-body"><div class="mc-name">Callaloo</div><div class="mc-note">Supply balanced · Buyer demand consistent → hold price</div><div class="sbar"><div class="sf bal" style="width:60%"></div></div></div><div class="mc-r"><div class="mc-price">$5/lb</div><span class="schip bal">Steady</span></div></div>
+      <div class="mc"><span style="font-size:18px">🥬</span><div class="mc-body"><div class="mc-name">Lettuce</div><div class="mc-note">Supply rising · Buyer demand unchanged → price softening</div><div class="sbar"><div class="sf over" style="width:88%"></div></div></div><div class="mc-r"><div class="mc-price">$3/lb</div><span class="schip over">Price pressure likely</span></div></div>
+      <div class="mc"><span style="font-size:18px">🧅</span><div class="mc-body"><div class="mc-name">Scallions</div><div class="mc-note">No supply in network · Buyer demand confirmed</div><div class="sbar"><div class="sf under" style="width:10%"></div></div></div><div class="mc-r"><div class="mc-price">$6/lb</div><span class="schip opp">Plant this</span></div></div>
+    </div>
+  </div>
+  <div class="bnav"><div class="bn on" onclick="navPro('home')"><span class="bn-em">🏠</span><span class="bn-lbl">Home</span></div><div class="bn" onclick="navPro('farm')"><span class="bn-em">🌿</span><span class="bn-lbl">My Farm</span></div><div class="bn" onclick="navPro('tools')"><span class="bn-em">🔧</span><span class="bn-lbl">Tools</span></div><div class="bn" onclick="navPro('market')"><span class="bn-em">📈</span><span class="bn-lbl">Market</span></div></div>
+</div>
+
+<!-- ════ PRO MY FARM ════ -->
+<div class="screen" id="s-pro-farm">
+  <div class="topbar dark"><div><div class="farm-name">Clarke Farm <span class="pro-badge">PRO</span></div><div class="farm-sub">📍 Eleuthera</div></div><div class="avatar">RC</div></div>
+  <div class="pad" style="padding-top:14px">
+    <div class="section"><div class="slabel">Automations today</div>
+      <div class="auto-item fired"><span class="ai-ic">🌅</span><div><div class="ai-h"><span class="lbl f">SENT</span>Morning farm brief</div><div class="ai-p">Today's priorities pushed to WhatsApp at 7:00am.</div><div class="ai-t">Today · 7:00am · Auto</div></div></div>
+      <div class="auto-item wa"><span class="ai-ic">💬</span><div><div class="ai-h"><span class="lbl w">WHATSAPP</span>Buyer alert sent</div><div class="ai-p">"Clarke Farm has scotch bonnet ready — 144 plants." 3 hotel buyers at 6:02am.</div><div class="ai-t">Today · 6:02am · 2 read receipts</div></div></div>
+      <div class="auto-item pending"><span class="ai-ic">🌙</span><div><div class="ai-h"><span class="lbl p">SCHEDULED</span>Spray window reminder</div><div class="ai-p">WhatsApp reminder — Pyrethrin Bed 4, window 6–10pm tonight.</div><div class="ai-t">Today · 5:30pm · Pending</div></div></div>
+      <div class="auto-item pending"><span class="ai-ic">💧</span><div><div class="ai-h"><span class="lbl p">SCHEDULED</span>Drip pause reminder</div><div class="ai-p">Pause drip timer Thursday evening — rain forecast Friday.</div><div class="ai-t">Thursday · 6:00pm · Pending</div></div></div>
+      <div class="auto-item fired"><span class="ai-ic">🔄</span><div><div class="ai-h"><span class="lbl f">CONFIRMED</span>Callaloo succession logged</div><div class="ai-p">March 21. Moon-optimised. Bed amendment reminder added for March 14.</div><div class="ai-t">Yesterday · 8:14am · Auto</div></div></div>
+    </div>
+    <div class="section"><div class="slabel">Soil Sista insights</div>
+      <div class="insight gap"><span class="ins-ic">📉</span><div><div class="ins-h">Production gap — week of April 14</div><div class="ins-p">No crops harvesting that week. Plan a succession now to avoid a 2-week revenue gap.</div></div></div>
+      <div class="insight warn"><span class="ins-ic">⚠️</span><div><div class="ins-h">Bed 3 — Fusarium risk</div><div class="ins-p">2nd consecutive Solanaceae planting. Rest and amend. French marigolds recommended.</div></div></div>
+      <div class="insight stop"><span class="ins-ic">🚫</span><div><div class="ins-h">Lettuce — price pressure likely</div><div class="ins-p">Supply is rising in the network and buyer demand is steady. Price pressure likely in 2–3 weeks. Consider timing your next planting for the gap after this cycle.</div></div></div>
+    </div>
+    <div class="section"><div class="slabel">Season revenue</div>
+      <div class="task-list">
+        <div class="t-item"><div><h5>Scotch Bonnet</h5><p>144 plants · 3 buyers notified</p></div><span class="tv g">$1,440–2,880</span></div>
+        <div class="t-item"><div><h5>Callaloo</h5><p>96 plants · 8 cuts</p></div><span class="tv g">$480–840</span></div>
+        <div class="t-item"><div><h5>Tomatoes</h5><p>48 plants</p></div><span class="tv g">$576–864</span></div>
+        <div class="t-item" style="background:#f0faf4"><div><h5>Season total</h5><p>All crops</p></div><span class="tv g" style="font-size:14px">$2,496–4,584</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="bnav"><div class="bn" onclick="navPro('home')"><span class="bn-em">🏠</span><span class="bn-lbl">Home</span></div><div class="bn on" onclick="navPro('farm')"><span class="bn-em">🌿</span><span class="bn-lbl">My Farm</span></div><div class="bn" onclick="navPro('tools')"><span class="bn-em">🔧</span><span class="bn-lbl">Tools</span></div><div class="bn" onclick="navPro('market')"><span class="bn-em">📈</span><span class="bn-lbl">Market</span></div></div>
+</div>
+
+<!-- ════ PRO TOOLS ════ -->
+<div class="screen" id="s-pro-tools">
+  <div class="topbar dark"><div><div class="farm-name">Clarke Farm <span class="pro-badge">PRO</span></div><div class="farm-sub">📍 Eleuthera</div></div><div class="avatar">RC</div></div>
+  <div class="pad" style="padding-top:14px">
+    <div class="tool-sec">Plan & grow</div>
+    <div class="tools-grid">
+      <div class="tool-card" onclick="window.open('SoilSista_CropPlanner_v4.html','_blank')"><div class="tc-em">📅</div><div class="tc-h">Crop planner</div><div class="tc-p">Full planner with calendar + spray cutoffs</div></div>
+      <a class="tool-card" href="SoilSista_FarmGuide_v1.html" target="_blank"><div class="tc-em">🔄</div><div class="tc-h">Farm guide</div><div class="tc-p">Rotation, water, harvest timing, seed saving</div></a>
+    </div>
+    <div class="tool-sec">Identify & manage</div>
+    <div class="tools-grid">
+      <a class="tool-card" href="SoilSista_PestTool_v4.html" target="_blank"><div class="tc-em">🔍</div><div class="tc-h">Pest & disease</div><div class="tc-p">Full library + damage identifier</div></a>
+      <a class="tool-card" href="SoilSista_PestTool_v4.html" target="_blank"><div class="tc-em">🌿</div><div class="tc-h">Nutrient issues</div><div class="tc-p">Deficiency + toxicity identifier</div></a>
+    </div>
+    <div class="tool-sec">Pro tools — all active</div>
+    <div class="tools-grid">
+      <div class="tool-card" style="border-color:var(--l)"><div class="tc-em">📸</div><div class="tc-h">Photo diagnosis</div><div class="tc-p">Upload photo — get hypothesis + action plan</div></div>
+      <div class="tool-card" style="border-color:var(--l)"><div class="tc-em">🔔</div><div class="tc-h">Spray alerts</div><div class="tc-p">Pushed to WhatsApp when window opens</div></div>
+      <div class="tool-card" style="border-color:var(--l)"><div class="tc-em">📊</div><div class="tc-h">Farm records</div><div class="tc-p">Harvest logs, yield tracking, season data</div></div>
+      <div class="tool-card" style="border-color:var(--l)"><div class="tc-em">🤝</div><div class="tc-h">Buyer connect</div><div class="tc-p">Post your harvest, match with buyers</div></div>
+      <div class="tool-card" style="border-color:var(--l)"><div class="tc-em">📅</div><div class="tc-h">Full calendar</div><div class="tc-p">Succession, fertiliser, cutoffs scheduled</div></div>
+      <div class="tool-card" style="border-color:var(--l)"><div class="tc-em">💬</div><div class="tc-h">WhatsApp advisory</div><div class="tc-p">Live support + tailored guidance</div></div>
+    </div>
+  </div>
+  <div class="bnav"><div class="bn" onclick="navPro('home')"><span class="bn-em">🏠</span><span class="bn-lbl">Home</span></div><div class="bn" onclick="navPro('farm')"><span class="bn-em">🌿</span><span class="bn-lbl">My Farm</span></div><div class="bn on" onclick="navPro('tools')"><span class="bn-em">🔧</span><span class="bn-lbl">Tools</span></div><div class="bn" onclick="navPro('market')"><span class="bn-em">📈</span><span class="bn-lbl">Market</span></div></div>
+</div>
+
+<!-- ════ PRO MARKET ════ -->
+<div class="screen" id="s-pro-market">
+  <div class="topbar dark"><div><div class="farm-name">Clarke Farm <span class="pro-badge">PRO</span></div><div class="farm-sub">📍 Eleuthera</div></div><div class="avatar">RC</div></div>
+  <div class="pad" style="padding-top:14px">
+    <div class="section"><div class="slabel">Market signals — supply & demand</div>
+      <div class="mc"><span style="font-size:18px">🌶️</span><div class="mc-body"><div class="mc-name">Scotch Bonnet</div><div class="mc-note">You + 1 farm · 3 buyers waiting</div><div class="sbar"><div class="sf under" style="width:30%"></div></div></div><div class="mc-r"><div class="mc-price">$15/lb</div><span class="schip under">Gap — sell now</span></div></div>
+      <div class="mc"><span style="font-size:18px">🧅</span><div class="mc-body"><div class="mc-name">Scallions</div><div class="mc-note">No supply in network · Buyers asking → open gap</div><div class="sbar"><div class="sf under" style="width:8%"></div></div></div><div class="mc-r"><div class="mc-price">$6/lb</div><span class="schip opp">Plant this</span></div></div>
+      <div class="mc"><span style="font-size:18px">🍅</span><div class="mc-body"><div class="mc-name">Cherry Tomatoes</div><div class="mc-note">Low supply · Hotels increasing orders → opportunity</div><div class="sbar"><div class="sf under" style="width:18%"></div></div></div><div class="mc-r"><div class="mc-price">$8/lb</div><span class="schip opp">Opportunity</span></div></div>
+      <div class="mc"><span style="font-size:18px">🌱</span><div class="mc-body"><div class="mc-name">Callaloo</div><div class="mc-note">Supply balanced · Buyer demand consistent → hold price</div><div class="sbar"><div class="sf bal" style="width:60%"></div></div></div><div class="mc-r"><div class="mc-price">$5/lb</div><span class="schip bal">Steady</span></div></div>
+      <div class="mc"><span style="font-size:18px">🥬</span><div class="mc-body"><div class="mc-name">Lettuce</div><div class="mc-note">Supply rising · Buyer demand unchanged → price softening</div><div class="sbar"><div class="sf over" style="width:88%"></div></div></div><div class="mc-r"><div class="mc-price">$3/lb</div><span class="schip over">Price pressure likely</span></div></div>
+    </div>
+  </div>
+  <div class="bnav"><div class="bn" onclick="navPro('home')"><span class="bn-em">🏠</span><span class="bn-lbl">Home</span></div><div class="bn" onclick="navPro('farm')"><span class="bn-em">🌿</span><span class="bn-lbl">My Farm</span></div><div class="bn" onclick="navPro('tools')"><span class="bn-em">🔧</span><span class="bn-lbl">Tools</span></div><div class="bn on" onclick="navPro('market')"><span class="bn-em">📈</span><span class="bn-lbl">Market</span></div></div>
+</div>
+
+<script>
+let currentMode='su';
+
+
+function setMode(m){
+  currentMode=m;
+  ['su','fr','pr'].forEach(x=>document.getElementById('dn-'+x).classList.remove('on'));
+  document.getElementById('dn-'+m).classList.add('on');
+  if(m==='su') showScreen('s-signup');
+  else if(m==='fr') showScreen('s-free-home');
+  else if(m==='pr') showScreen('s-pro-home');
+}
+function showScreen(id){
+  document.querySelectorAll('.screen,.pscreen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(document.getElementById('saveBannerArea')) document.getElementById('saveBannerArea').style.display='none';
+  window.scrollTo(0,0);
+}
+function navFree(t){showScreen({home:'s-free-home',farm:'s-free-farm',tools:'s-free-tools',market:'s-free-market'}[t]);}
+function navPro(t){showScreen({home:'s-pro-home',farm:'s-pro-farm',tools:'s-pro-tools',market:'s-pro-market'}[t]);}
+function suStep(n){
+  document.querySelectorAll('.su-step').forEach(s=>s.classList.remove('active'));
+  document.getElementById('ss'+n).classList.add('active');
+  [1,2,3,4].forEach(i=>document.getElementById('sd'+i).classList.toggle('on',i<=n));
+  window.scrollTo(0,0);
+}
+function selPlan(p){
+  document.getElementById('pgf').classList.toggle('sel',p==='free');
+  document.getElementById('pgp').classList.toggle('sel',p==='pro');
+  document.getElementById('pgp').classList.toggle('pro-sel',p==='pro');
+}
+function toggleMoon(t){
+  const T=t.charAt(0).toUpperCase()+t.slice(1);
+  document.getElementById('moonTog'+T).classList.toggle('on');
+  document.getElementById('moonPanel'+T).classList.toggle('open');
+}
+function toggleExpand(el){const d=el.querySelector('.cc-detail');if(d)d.classList.toggle('open');}
+function openPlanner(){window.open('SoilSista_CropPlanner_v4.html','_blank');}
+function saveToDash(){
+  if(!pendingCrop)return;
+  const list=document.getElementById('dashCropList')||document.createElement('div');
+  const c=document.createElement('div');
+  const pct=Math.min(Math.round((pendingCrop.daysSincePlanting/pendingCrop.daysToHarvest)*100),100);
+  const bc=pct>=90?'r':pct>=70?'a':'g';
+  const badge=pct>=100?'Ready soon':pendingCrop.daysLeft+' days left';
+  c.className='cc hl';
+  c.innerHTML=`<div class="cc-top"><div class="cc-left"><span style="font-size:18px">${pendingCrop.emoji}</span><div><div class="cc-name">${pendingCrop.name}</div><div class="cc-sub">${pendingCrop.beds} bed${pendingCrop.beds>1?'s':''} · ${pendingCrop.plants} plants</div></div></div><span class="badge ${bc}">${badge}</span></div><div class="prog-row"><div class="pb"><div class="pf ${bc}" style="width:${pct}%"></div></div><span class="plabel">Day ${pendingCrop.daysSincePlanting} of ${pendingCrop.daysToHarvest}</span></div>`;
+  const fh=document.querySelector('#s-free-home .section:nth-child(3)');
+  if(fh)fh.appendChild(c);
+  pendingCrop=null;
+  if(currentMode==='pr') navPro('home'); else navFree('home');
+}
+
+// ── Dashboard navigation ──────────────────────────────────
+function goScreen(id){
+  document.querySelectorAll('.pscreen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function goToPlanner(){
+  goScreen('pl-result');
+  initPlanner();
+}
+
+// ── Save plan back to dashboard ────────────────────────────
+// pendingCrop declared in outer scope
+
+function saveToDash(){
+  if(!pendingCrop) return;
+  const list = document.getElementById('dashCropList');
+  const card = document.createElement('div');
+  card.className = 'crop-card-d hl';
+  const pct = Math.min(Math.round((pendingCrop.daysSincePlanting / pendingCrop.daysToHarvest)*100), 100);
+  const barClass = pct >= 90 ? 'r' : pct >= 70 ? 'a' : 'g';
+  const badgeClass = pct >= 100 ? 'r' : pct >= 80 ? 'a' : 'g';
+  const badgeText = pct >= 100 ? 'Ready soon' : pendingCrop.daysLeft + ' days left';
+  card.innerHTML = `
+    <div class="cc-row">
+      <div class="cc-left">
+        <span style="font-size:19px">${pendingCrop.emoji}</span>
+        <div>
+          <div style="font-size:13px;font-weight:600;color:var(--tx)">${pendingCrop.name}</div>
+          <div style="font-size:11px;color:var(--mu)">${pendingCrop.beds} bed${pendingCrop.beds>1?'s':''} · ${pendingCrop.plants} plants</div>
+        </div>
+      </div>
+      <span class="cc-badge ${badgeClass}">${badgeText}</span>
+    </div>
+    <div class="prog-row">
+      <div class="pbar"><div class="pfill ${barClass}" style="width:${pct}%"></div></div>
+      <span class="plabel">Day ${pendingCrop.daysSincePlanting} of ${pendingCrop.daysToHarvest}</span>
+    </div>`;
+  list.appendChild(card);
+  pendingCrop = null;
+  document.getElementById('saveBannerArea').style.display = 'none';
+  goScreen('pl-setup');
+}
+
+// ── Planner init (inlined from crop planner tool) ──────────
+let plannerInited = false;
+
+function initPlanner(){
+  if(plannerInited) return;
+  plannerInited = true;
+  const mount = document.getElementById('plannerMount');
+
+  // Build planner HTML inside the mount
+  mount.innerHTML = `
+  <div style="background:var(--f);padding:14px 16px 12px;display:flex;align-items:center;justify-content:space-between">
+    <div>
+      <div style="font-family:'DM Serif Display',serif;font-size:17px;color:#fff">Soil <span style="color:var(--p)">Sista</span></div>
+      <div style="font-size:11px;color:var(--p);margin-top:2px;opacity:.8" id="plannerSubHead">Crop Planner</div>
+    </div>
+    <button onclick="goScreen('pl-setup')" style="background:none;border:none;color:var(--p);font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif">← Back to dashboard</button>
+  </div>
+  <div id="plannerScreenSetup" style="padding:16px 14px 0;background:#f8f3e8">
+    <div style="font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--mu);margin-bottom:8px">Choose a crop</div>
+    <div style="display:flex;gap:5px;overflow-x:auto;padding-bottom:3px;margin-bottom:10px;scrollbar-width:none" id="pCatRow"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px" id="pCropGrid"></div>
+    <div id="pFormBox" style="display:none;background:#fff;border-radius:10px;padding:14px;margin-top:8px;border:.5px solid #ddd">
+      <h3 id="pFormTitle" style="font-size:13px;font-weight:600;color:var(--f);margin-bottom:10px">Plan your crop</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+        <div style="display:flex;flex-direction:column;gap:3px">
+          <label style="font-size:10px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.6px">Bed Width (ft)</label>
+          <input type="number" id="pBw" value="4" min="1" max="20" step="0.5" style="padding:8px 10px;border:1px solid #ddd;border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif">
+        </div>
+        <div style="display:flex;flex-direction:column;gap:3px">
+          <label style="font-size:10px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.6px">Bed Length (ft)</label>
+          <input type="number" id="pBl" value="8" min="1" max="100" step="0.5" style="padding:8px 10px;border:1px solid #ddd;border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif">
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+        <div style="display:flex;flex-direction:column;gap:3px">
+          <label style="font-size:10px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.6px">Number of Beds</label>
+          <input type="number" id="pNb" value="1" min="1" max="50" style="padding:8px 10px;border:1px solid #ddd;border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif">
+        </div>
+        <div style="display:flex;flex-direction:column;gap:3px">
+          <label style="font-size:10px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.6px">Planting Date</label>
+          <input type="date" id="pPd" style="padding:8px 10px;border:1px solid #ddd;border-radius:8px;font-size:13px;font-family:'DM Sans',sans-serif">
+        </div>
+      </div>
+      <button onclick="pGen()" style="width:100%;background:var(--f);color:#fff;border:none;border-radius:10px;padding:13px;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif">Generate my plan →</button>
+    </div>
+  </div>
+  <div id="plannerScreenPlan" style="display:none">
+    <div id="pPlanContent"></div>
+  </div>`;
+
+  // Set today's date
+  const t = new Date(); t.setDate(t.getDate()+1);
+  document.getElementById('pPd').value = t.toISOString().split('T')[0];
+
+  pInitSetup();
+}
+
+// ── Crop data (subset, key crops) ─────────────────────────
+function goScreen(id){
+  document.querySelectorAll('.screen,.pscreen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(document.getElementById('saveBannerArea')) document.getElementById('saveBannerArea').style.display='none';
+  window.scrollTo(0,0);
+}
+function showSetup(){if(currentMode==='pr')navPro('home');else navFree('home');}
+setMode('su');
+</script>
+</body>
+</html>
