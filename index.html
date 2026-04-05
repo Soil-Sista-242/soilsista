@@ -288,34 +288,6 @@ html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--cream);c
 .start-card button{background:var(--white);color:var(--gm);padding:9px 16px;border-radius:var(--rsm);font-weight:700;font-size:13px;border:none;cursor:pointer;font-family:'DM Sans',sans-serif}
 .info-pill{background:var(--gp);color:var(--gd);padding:10px 14px;border-radius:var(--rsm);font-size:12px;margin-bottom:14px;line-height:1.5}
 .export-btn{display:flex;align-items:center;gap:10px;padding:13px 14px;background:var(--cream);border-radius:var(--rsm);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:var(--dark);width:100%;margin-bottom:10px}
-/* LIBRARY */
-.lib-tile{background:var(--white);border-radius:var(--r);padding:14px 12px;cursor:pointer;text-align:center;border:2px solid transparent;box-shadow:var(--sh);transition:.15s}
-.lib-tile:active{border-color:var(--gm);background:var(--gp)}
-.lib-tile-ico{font-size:26px;margin-bottom:6px}
-.lib-tile-name{font-size:12px;font-weight:700;color:var(--dark);margin-bottom:2px}
-.lib-tile-short{font-size:10px;color:var(--muted);line-height:1.3}
-.lib-tab{flex-shrink:0;padding:5px 12px;border-radius:18px;border:2px solid #DDE8DE;background:var(--white);font-size:11px;font-weight:600;cursor:pointer;color:var(--muted);white-space:nowrap}
-.lib-tab.on{background:var(--gd);border-color:var(--gd);color:var(--white)}
-.lib-warn-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #F0F4F0}
-.lib-warn-item:last-child{border-bottom:none}
-.lib-warn-ico{font-size:16px;flex-shrink:0;margin-top:1px}
-.lib-warn-txt{font-size:12px;color:var(--text);line-height:1.5}
-.lib-level{border-radius:var(--rsm);overflow:hidden;margin-bottom:8px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
-.lib-level-hdr{display:flex;align-items:center;gap:8px;padding:11px 14px;cursor:pointer}
-.lib-level-num{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.2);color:var(--white);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.lib-level-title{font-size:13px;font-weight:600;color:var(--white);flex:1}
-.lib-level-tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:8px;white-space:nowrap}
-.lib-level-chev{color:rgba(255,255,255,.5);font-size:11px;transition:.2s}
-.lib-level.open .lib-level-chev{transform:rotate(180deg)}
-.lib-level-body{display:none;background:var(--white)}
-.lib-level.open .lib-level-body{display:block}
-.lib-action{display:flex;align-items:flex-start;gap:8px;padding:10px 14px;border-bottom:1px solid #F0F4F0}
-.lib-action:last-child{border-bottom:none}
-.lib-action-dot{width:5px;height:5px;border-radius:50%;margin-top:7px;flex-shrink:0}
-.lib-action-txt{font-size:12px;color:var(--text);line-height:1.5}
-.lib-timing{background:#F8F9FA;padding:8px 14px;display:flex;gap:14px;flex-wrap:wrap}
-.lib-timing-item{font-size:10px;font-weight:600;color:var(--muted)}
-.lib-timing-item span{color:var(--dark)}
 </style>
 </head>
 <body>
@@ -365,14 +337,14 @@ html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--cream);c
       <div class="step-lbl">Step 1 of 4</div>
       <div class="step-ttl">Which island are you farming on?</div>
       <div class="opt-grid">
-        <div class="opt-card" onclick="selOpt('island','New Providence',this)"><div class="opt-icon">🏙️</div><div class="opt-lbl">New Providence</div><div class="opt-sub">Nassau</div></div>
-        <div class="opt-card" onclick="selOpt('island','Eleuthera',this)"><div class="opt-icon">🌿</div><div class="opt-lbl">Eleuthera</div><div class="opt-sub">The Bahamas</div></div>
-        <div class="opt-card" onclick="selOpt('island','Abaco',this)"><div class="opt-icon">🌊</div><div class="opt-lbl">Abaco</div><div class="opt-sub">The Bahamas</div></div>
-        <div class="opt-card" onclick="selOpt('island','Acklins',this)"><div class="opt-icon">🌾</div><div class="opt-lbl">Acklins</div><div class="opt-sub">The Bahamas</div></div>
-        <div class="opt-card" onclick="selOpt('island','Andros',this)"><div class="opt-icon">🌴</div><div class="opt-lbl">Andros</div><div class="opt-sub">The Bahamas</div></div>
-        <div class="opt-card" onclick="selOpt('island','Exuma',this)"><div class="opt-icon">🏖️</div><div class="opt-lbl">Exuma</div><div class="opt-sub">The Bahamas</div></div>
-        <div class="opt-card" onclick="selOpt('island','Long Island',this)"><div class="opt-icon">🏝️</div><div class="opt-lbl">Long Island</div><div class="opt-sub">The Bahamas</div></div>
-        <div class="opt-card" onclick="selOpt('island','Other',this)"><div class="opt-icon">📍</div><div class="opt-lbl">Other island</div><div class="opt-sub">The Bahamas</div></div>
+        <div class="opt-card" onclick="selOpt('island','Nassau / New Providence',this)"><div class="opt-icon">🏝️</div><div class="opt-lbl">Nassau</div><div class="opt-sub">New Providence</div></div>
+        <div class="opt-card" onclick="selOpt('island','Eleuthera',this)"><div class="opt-icon">🌿</div><div class="opt-lbl">Eleuthera</div><div class="opt-sub">Bahamas</div></div>
+        <div class="opt-card" onclick="selOpt('island','Abaco',this)"><div class="opt-icon">🌊</div><div class="opt-lbl">Abaco</div><div class="opt-sub">Bahamas</div></div>
+        <div class="opt-card" onclick="selOpt('island','Acklins',this)"><div class="opt-icon">🌾</div><div class="opt-lbl">Acklins</div><div class="opt-sub">Bahamas</div></div>
+        <div class="opt-card" onclick="selOpt('island','Antigua',this)"><div class="opt-icon">🏖️</div><div class="opt-lbl">Antigua</div><div class="opt-sub">& Barbuda</div></div>
+        <div class="opt-card" onclick="selOpt('island','Dominica',this)"><div class="opt-icon">🌋</div><div class="opt-lbl">Dominica</div><div class="opt-sub">E. Caribbean</div></div>
+        <div class="opt-card" onclick="selOpt('island','Jamaica',this)"><div class="opt-icon">☀️</div><div class="opt-lbl">Jamaica</div></div>
+        <div class="opt-card" onclick="selOpt('island','Other',this)"><div class="opt-icon">📍</div><div class="opt-lbl">Other</div></div>
       </div>
       <button class="btn btn-g" onclick="ob(2)">Continue →</button>
     </div>
@@ -388,8 +360,8 @@ html,body{height:100%;font-family:'DM Sans',sans-serif;background:var(--cream);c
     <div class="ob-step" id="ob3">
       <div class="step-lbl">Step 3 of 4</div>
       <div class="step-ttl">Choose your plan</div>
-      <div class="plan-card sel" onclick="selPlan('free',this)"><div class="plan-top"><span class="plan-name">🌱 Free</span><span class="plan-price">$0 always</span></div><div class="plan-desc">Plan up to 3 crops · Climate alerts · Market pulse · Full pest & disease library · Harvest & sales log · Order list</div></div>
-      <div class="plan-card" onclick="selPlan('pro',this)"><div class="plan-top"><span class="plan-name">⭐ Pro</span><span class="plan-price">$25/month</span></div><div class="plan-desc">Unlimited crops · WhatsApp advisory · Automated alerts · Photo diagnosis · Full supply signals · Buyer connect · $199/year</div><div style="margin-top:8px"><span class="plan-badge">Coming soon</span></div></div>
+      <div class="plan-card sel" onclick="selPlan('free',this)"><div class="plan-top"><span class="plan-name">🌱 Free</span><span class="plan-price">$0 always</span></div><div class="plan-desc">Plan up to 3 crops · Climate alerts · Market pulse · Full diagnostic · Harvest & sales log · Order list</div></div>
+      <div class="plan-card" onclick="selPlan('pro',this)"><div class="plan-top"><span class="plan-name">⭐ Pro</span><span class="plan-price">$12/month</span></div><div class="plan-desc">Unlimited crops · WhatsApp advisory · Automated alerts · Full supply signals · Buyer connect</div><div style="margin-top:8px"><span class="plan-badge">Coming soon</span></div></div>
       <button class="btn btn-g" onclick="ob(4)">Continue →</button>
       <button class="btn btn-o" onclick="ob(2)">← Back</button>
     </div>
@@ -875,14 +847,14 @@ function renderAll(){
 }
 
 const ISLAND_COORDS={
-  'New Providence':{lat:25.0443,lon:-77.3504},
+  'Nassau / New Providence':{lat:25.0443,lon:-77.3504},
   'Eleuthera':{lat:25.1333,lon:-76.1667},
   'Abaco':{lat:26.35,lon:-77.05},
   'Acklins':{lat:22.08,lon:-74.0},
-  'Andros':{lat:24.7,lon:-77.8},
-  'Exuma':{lat:23.5,lon:-75.8},
-  'Long Island':{lat:23.25,lon:-75.1},
-  'Other island':{lat:25.0443,lon:-77.3504}
+  'Antigua':{lat:17.1274,lon:-61.8468},
+  'Dominica':{lat:15.415,lon:-61.371},
+  'Jamaica':{lat:18.1096,lon:-77.2975},
+  'Other':{lat:25.0443,lon:-77.3504}
 };
 
 async function loadWx(){
@@ -1445,247 +1417,6 @@ window.switchTab=tab=>{
 
 // SET TODAY DEFAULTS
 ['pl-date','hv-date','sl-date','sp-date','ft-date','nt-date','qp-date'].forEach(id=>{const el=$(id);if(el)el.valueAsDate=new Date()});
-
-
-// ═══════════════════════════════════════════
-// PEST / DISEASE / DEFICIENCY LIBRARY
-// ═══════════════════════════════════════════
-const PCATS=['Sucking insects','Caterpillars','Soil & root','Beetles & hoppers','Molluscs & misc','Wildlife'];
-const DCATS=['Macronutrients','Micronutrients','Phytotoxicity'];
-
-const PESTS=[
-{id:'aphids',cat:'Sucking insects',emoji:'🌿',name:'Aphids',short:'Clustered sap-suckers, virus spreaders',desc:'Soft-bodied insects that cluster on new growth and leaf undersides, sucking plant sap. They spread viruses and reproduce extremely fast. Ants farming aphids is your first warning sign.',trigger:'⛅ Warm rain followed by heat',warnings:[{i:'🐜',t:'Ants moving rapidly up and down stems — ants farm aphids for honeydew. Ants are your first alert.'},{i:'✨',t:'Shiny sticky honeydew on leaves before you see any insects.'},{i:'⬛',t:'Black sooty mold growing on leaves below sticky patches.'},{i:'🌀',t:'New growth curling or cupping inward.'}],levels:[{n:1,title:'Mechanical',col:'#1E4D35',tag:'Start here',tb:'#D8F3DC',tc:'#1E4D35',actions:['Strong water blast on leaf undersides. Morning. Physically removes aphids.','Remove infested leaves — drop in soapy water, dispose away from farm.','Reflective silver mulch around seedlings — disrupts aphid navigation.','Block ants with Tanglefoot on stakes. Without ants, beneficial insects collapse colonies fast.'],timing:'Anytime · Daily if needed'},{n:2,title:'Biological',col:'#2D6A4F',tag:'If Level 1 not enough',tb:'#EBF5EE',tc:'#2D6A4F',actions:['Release ladybugs at dusk. Need aphids present to stay.','Beauveria bassiana — needs humidity above 70%.','If you see mummified bronze aphids, parasitic wasps are already working. Do not spray.'],timing:'Evening · Every 7 days'},{n:3,title:'Light organic',col:'#E9A825',tag:'Moderate pressure',tb:'#FEF8E7',tc:'#7A5C1E',actions:['Insecticidal soap (potassium salts of fatty acids) — fine mist on all leaf undersides. Must contact pest directly.','Neem oil (azadirachtin 0.9%) — evening only, both sides of leaves.'],timing:'Evening or early morning · Every 5–7 days'},{n:4,title:'Aggressive organic',col:'#C0392B',tag:'Heavy infestation',tb:'#FDF2F2',tc:'#C0392B',actions:['Pyrethrin (Pyganic EC 5%) — evening spray, full coverage. Fast knockdown. Rotate — no more than 3 consecutive applications.'],timing:'EVENING ONLY · Every 3–5 days. Rotate products.'}],avoid:'Imidacloprid — systemic, moves into pollen and nectar, devastating to bees. Spraying when you see mummified aphids or ladybug larvae.',tip:'Ants suddenly active on a plant means an aphid colony is below. Check leaf undersides immediately before any visible plant damage.'},
-{id:'whiteflies',cat:'Sucking insects',emoji:'🦟',name:'Whiteflies',short:'White cloud when plant is shaken, virus spreaders',desc:'Tiny white insects on leaf undersides. Disturb the plant and they fly up in a cloud. They spread viruses rapidly and devastate tomatoes and peppers in hot conditions.',trigger:'☀️ Hot dry conditions',warnings:[{i:'🟡',t:'Yellow sticky traps filling with tiny white insects — set traps before planting.'},{i:'🥛',t:'Silvery or pale patches on upper leaf surface from feeding below.'},{i:'✨',t:'Sticky honeydew residue followed by black sooty mold.'},{i:'💨',t:'White cloud rises when you shake the plant.'}],levels:[{n:1,title:'Mechanical',col:'#1E4D35',tag:'Start here',tb:'#D8F3DC',tc:'#1E4D35',actions:['Yellow sticky traps — 2–3 per bed. Most effective monitoring and early control tool.','Reflective silver mulch — one of the best deterrents.','Prune lower leaves on tomatoes and peppers — removes population reservoirs.'],timing:'Morning · Daily monitoring'},{n:2,title:'Biological',col:'#2D6A4F',tag:'Moderate pressure',tb:'#EBF5EE',tc:'#2D6A4F',actions:['Beauveria bassiana — apply when humidity exceeds 70%. Spores infect whiteflies on contact.','Encarsia formosa — parasitic wasp. Release at first sign above 20°C.'],timing:'Overcast or evening · Every 7 days'},{n:3,title:'Light organic',col:'#E9A825',tag:'Active infestation',tb:'#FEF8E7',tc:'#7A5C1E',actions:['Insecticidal soap — target leaf undersides directly. Must contact insect.','Neem oil — evening spray, full leaf coverage especially undersides.'],timing:'Evening or early morning · Every 5–7 days'},{n:4,title:'Aggressive organic',col:'#C0392B',tag:'Heavy infestation',tb:'#FDF2F2',tc:'#C0392B',actions:['Pyrethrin (Pyganic EC 5%) — fast knockdown of adults. Evening spray.','Azera (azadirachtin + pyrethrins) — combines contact kill with growth regulation.'],timing:'EVENING ONLY · Every 3–5 days. Rotate always.'}],avoid:'Using the same active ingredient more than 3 consecutive applications — whiteflies develop resistance rapidly.',tip:'Set yellow sticky traps the day you transplant, before you see a single whitefly. When traps start filling up, act immediately.'},
-{id:'spidermites',cat:'Sucking insects',emoji:'🕷️',name:'Spider mites',short:'Fine webbing, bronze stippling, drought-triggered',desc:'Microscopic arachnids that pierce plant cells. Not controlled by most insecticides — using the wrong product makes outbreaks significantly worse. Consistent irrigation is your most powerful tool.',trigger:'☀️🌵 Hot, dry, dusty conditions',warnings:[{i:'🕸️',t:'Fine webbing on leaf undersides and between stems — most distinctive sign.'},{i:'🔴',t:'Tiny moving dots on leaf undersides under close inspection.'},{i:'🔘',t:'Bronze or silver stippling on upper leaf surface — hundreds of tiny pale dots.'},{i:'💧',t:'Worst during drought — water-stressed plants are the primary target.'}],levels:[{n:1,title:'Water blast — most effective',col:'#1E4D35',tag:'Start here',tb:'#D8F3DC',tc:'#1E4D35',actions:['Strong water blast on all leaf surfaces daily. Most effective early treatment.','Consistent irrigation — drought stress is the primary trigger. Never let plants dry out.','Remove heavily infested leaves and dispose far from farm.'],timing:'Morning · Daily during outbreak'},{n:2,title:'Biological',col:'#2D6A4F',tag:'Active infestation',tb:'#EBF5EE',tc:'#2D6A4F',actions:['Phytoseiulus persimilis (predatory mite) — release at first detection. Most effective biocontrol.','Beauveria bassiana — needs high humidity.'],timing:'Evening or overcast · Every 7 days'},{n:3,title:'Organic spray',col:'#E9A825',tag:'Heavy infestation',tb:'#FEF8E7',tc:'#7A5C1E',actions:['Neem oil — evening spray. Disrupts mite reproduction and molting.','Insecticidal soap — must contact mites directly. Repeat every 4–5 days.'],timing:'Evening ONLY · Every 4–5 days'}],avoid:'Pyrethrins for spider mites — kills predatory mites and makes outbreaks significantly worse. Spider mites are arachnids. Most insecticides are useless.',tip:'Consistent irrigation is your most powerful tool. A well-watered plant in moist conditions rarely has a severe spider mite problem.'},
-{id:'mealybugs',cat:'Sucking insects',emoji:'🤍',name:'Mealybugs',short:'White cottony clusters in stem joints',desc:'Soft-bodied insects coated in white waxy material. The wax coating repels contact sprays — penetrate it with alcohol or target the crawler stage.',trigger:'🌡️ Year-round, worst in hot humid dense plantings',warnings:[{i:'☁️',t:'White cottony masses in stem joints, growing tips, and leaf nodes.'},{i:'🐜',t:'Ants moving rapidly on plant stems — they farm mealybugs for honeydew.'},{i:'⬛',t:'Black sooty mold developing below cottony masses.'},{i:'🌿',t:'Distorted new growth at the growing tip.'}],levels:[{n:1,title:'Mechanical',col:'#1E4D35',tag:'Start here',tb:'#D8F3DC',tc:'#1E4D35',actions:['70% isopropyl alcohol on a cotton swab — dab directly on each visible cluster. Dissolves wax, kills on contact.','Block ants with Tanglefoot — without ants protecting them, natural predators collapse the colony.','Strong water spray on stem joints and growing tips.'],timing:'Anytime · Every 3 days until clear'},{n:3,title:'Organic spray',col:'#E9A825',tag:'Active infestation',tb:'#FEF8E7',tc:'#7A5C1E',actions:['Insecticidal soap — effective on crawlers before full wax coat develops.','Neem oil — evening spray and soil drench for root mealybugs.'],timing:'Evening only · Every 5–7 days'},{n:4,title:'Aggressive organic',col:'#C0392B',tag:'Heavy infestation',tb:'#FDF2F2',tc:'#C0392B',actions:['Pyrethrin (Pyganic EC 5%) — most effective on young crawlers. Evening spray.'],timing:'EVENING ONLY · Every 3–5 days'}],avoid:'Mixing Beauveria bassiana with any fungicide. Broad-spectrum insecticides that kill beneficial predators.',tip:'Cryptolaemus larvae look like large mealybugs but are larger and moving faster. That is your biocontrol working — do not spray.'},
-{id:'armyworms',cat:'Caterpillars',emoji:'🐛',name:'Armyworms',short:'Night feeders — strip beds overnight',desc:'Nocturnal larvae that move in groups and can strip an entire bed overnight. Cattle egrets and grackles moving fast through your rows are your earliest warning.',trigger:'🌧️ Warm rain + overcast nights',warnings:[{i:'🐦',t:'Cattle egrets or grackles moving fast through crop rows — most reliable early warning.'},{i:'🦋',t:'Large moths around lights at night — egg-laying occurring. Act before eggs hatch.'},{i:'🥚',t:'Pale cottony egg masses on leaves — crush immediately.'},{i:'💩',t:'Dark green frass on leaves and soil in the morning.'}],levels:[{n:1,title:'Mechanical',col:'#1E4D35',tag:'Start here',tb:'#D8F3DC',tc:'#1E4D35',actions:['Scout at night with a flashlight — hand-pick larvae into soapy water.','Find and crush egg masses immediately.','Clear weedy field borders — moths prefer laying eggs on tall weeds first.'],timing:'Night scouting · Every 2 nights'},{n:2,title:'Biological — Btk',col:'#2D6A4F',tag:'Young larvae',tb:'#EBF5EE',tc:'#2D6A4F',actions:['Bacillus thuringiensis var. kurstaki (Btk — Dipel/Xentari) — evening spray. ONLY effective on young small larvae. No rain for 24 hrs after application.','Steinernema carpocapsae nematodes — soil drench targeting pupae. Keep soil moist.'],timing:'EVENING — Btk degrades in UV · Every 5–7 days'},{n:4,title:'Aggressive organic',col:'#C0392B',tag:'Heavy infestation',tb:'#FDF2F2',tc:'#C0392B',actions:['Spinosad (Entrust SC) — evening spray. Effective on larger larvae. No more than 3 consecutive applications.','Btk + pyrethrin tank mix — most aggressive combination for heavy pressure.'],timing:'EVENING ONLY · Every 4–5 days. Rotate.'}],avoid:'Spraying during or right after rain. Spinosad more than 3 consecutive applications.',tip:'Birds moving intensively through crop rows means armyworm larvae are present. One cattle egret consuming armyworm larvae is worth more than a spray application.'},
-{id:'hornworm',cat:'Caterpillars',emoji:'🐢',name:'Hornworm',short:'Large green caterpillar, strips tomatoes from top',desc:'Large green caterpillar (up to 4 inches) with white diagonal stripes. Cryptic camouflage makes them very difficult to spot before significant damage occurs. Check plant tops first.',trigger:'☀️ Hot months — tomatoes and peppers',warnings:[{i:'💩',t:'Dark green or black frass on leaves below — larger than armyworm droppings.'},{i:'🍂',t:'Leaves chewed from the TOP of the plant downward.'},{i:'🐝',t:'Parasitic wasps hovering around plant — they are hunting larvae for you.'}],levels:[{n:1,title:'Hand-pick — most effective',col:'#1E4D35',tag:'Primary approach',tb:'#D8F3DC',tc:'#1E4D35',actions:['Inspect the tops of plants first. Hand-pick into soapy water. Check every 2 days.','UV/blacklight at night — hornworms fluoresce bright green. Very effective.'],timing:'Daily inspection · Every 2 days'},{n:2,title:'Biological',col:'#2D6A4F',tag:'Before spraying',tb:'#EBF5EE',tc:'#2D6A4F',actions:['Leave hornworms with white rice-like structures on back — those are Cotesia wasp pupae. Do not remove. These wasps will parasitize more larvae.','Btk — effective only on small young hornworms.'],timing:'Evening if using Btk · Every 5–7 days'},{n:4,title:'Aggressive organic',col:'#C0392B',tag:'Large larvae',tb:'#FDF2F2',tc:'#C0392B',actions:['Spinosad (Entrust SC) — most effective organic option. Works on all larval sizes.'],timing:'EVENING ONLY · Every 4–7 days'}],avoid:'Destroying hornworms with white Cotesia wasp pupae on their backs.',tip:'Check tops of tomato plants every 2 days in hot months. Top-down defoliation with large frass = hornworm.'},
-{id:'cutworms',cat:'Soil & root',emoji:'🌙',name:'Cutworms',short:'Seedlings severed at soil level overnight',desc:'Soil-dwelling nocturnal larvae that sever seedlings at soil level. They curl into a C-shape when disturbed. The number one destroyer of new transplants.',trigger:'🌧️ Moist soil after rain at transplant time',warnings:[{i:'✂️',t:'Healthy seedlings found severed completely at soil level overnight.'},{i:'🐦',t:'Birds pecking intensively at soil near crop edges.'}],levels:[{n:1,title:'Physical barriers at transplanting',col:'#1E4D35',tag:'Do this at transplanting',tb:'#D8F3DC',tc:'#1E4D35',actions:['Cardboard collar — cut 3 inches wide, push 1 inch into soil around every seedling at transplant time.','Diatomaceous earth (food grade) ring around each plant base.','Hand-pick at night — scratch soil near damaged plants, find curled larvae, destroy.'],timing:'At transplanting · Check every morning first week'},{n:4,title:'Aggressive organic',col:'#C0392B',tag:'Severe damage',tb:'#FDF2F2',tc:'#C0392B',actions:['Spinosad bait — apply around plant base in the evening.','Pyrethrin soil drench — drench soil around plant base at dusk.'],timing:'Evening · Every 3–5 days'}],avoid:'Leaving crop debris in the ground between seasons — primary egg-laying habitat.',tip:'Cardboard collar plus diatomaceous earth ring on transplanting day. Two physical barriers, zero chemicals, close to zero cutworm damage.'},
-{id:'slugs',cat:'Molluscs & misc',emoji:'🐌',name:'Slugs & snails',short:'Slime trails, irregular holes at night',desc:'Soft-bodied molluscs that feed at night on leaves, stems, and seedlings, leaving distinctive silvery mucus trails. Worse after rain and in humid conditions.',trigger:'🌧️ After rain, cool humid nights, moist mulch',warnings:[{i:'✨',t:'Silvery mucus trails on leaves, soil, and stems.'},{i:'🕳️',t:'Irregular holes in leaves — larger and more ragged than insect feeding.'},{i:'🌿',t:'Seedlings and young transplants disappearing overnight.'}],levels:[{n:1,title:'Beer traps — highly effective',col:'#1E4D35',tag:'Start here',tb:'#D8F3DC',tc:'#1E4D35',actions:['Beer trap — shallow dish buried flush with soil, filled with cheap flat beer. Slugs are strongly attracted, crawl in and drown. Check and refresh daily.','Copper tape around raised bed edges — mild galvanic deterrent. Very effective barrier.','Hand-pick at night with a flashlight after rain.'],timing:'Evening · Refresh beer traps daily'},{n:3,title:'Organic bait',col:'#E9A825',tag:'Heavy pressure',tb:'#FEF8E7',tc:'#7A5C1E',actions:['Iron phosphate bait (Sluggo) — OMRI-listed organic. Safe for birds, pets, earthworms. Scatter near plants in the evening.'],timing:'Evening, after watering · Every 7–14 days or after heavy rain'}],avoid:'Metaldehyde slug baits — highly toxic to birds, pets, and wildlife. Never use near edible crops.',tip:'Beer traps can catch dozens of slugs per night after rain. Use cheap flat beer — the yeast is the attractant, not the alcohol.'},
-{id:'grasshoppers',cat:'Beetles & hoppers',emoji:'🦗',name:'Grasshoppers',short:'Flying chewers, rapid defoliation',desc:'Large mobile chewing insects that can migrate into farms in numbers and cause rapid defoliation. Most active in hot dry conditions. Early morning is your only effective spray window.',trigger:'☀️🌵 Hot dry conditions, end of dry season',warnings:[{i:'🦗',t:'Visible grasshoppers jumping when the crop area is approached.'},{i:'🍂',t:'Large irregular pieces chewed from leaf edges inward.'}],levels:[{n:1,title:'Mechanical',col:'#1E4D35',tag:'Start here',tb:'#D8F3DC',tc:'#1E4D35',actions:['Row covers or fine mesh over vulnerable beds during heavy pressure.','Kaolin clay spray (Surround WP) — coating deters feeding. Reapply after rain.'],timing:'Preventive · Reapply kaolin after rain'},{n:4,title:'Aggressive organic',col:'#C0392B',tag:'Heavy infestation',tb:'#FDF2F2',tc:'#C0392B',actions:['Pyrethrin (Pyganic EC 5%) — most effective in early morning when grasshoppers are cold and sluggish.'],timing:'EARLY MORNING ONLY — before 8am · Every 3–5 days'}],avoid:'Spraying after 9am — grasshoppers will simply fly away.',tip:'Early morning is your only effective spray window for grasshoppers. Before 8am they are cold and sluggish.'},
-{id:'birds',cat:'Wildlife',emoji:'🐦',name:'Birds',short:'Observe before acting — many are beneficial',desc:'Various bird species can damage ripening fruit. However many birds are highly beneficial pest controllers. Identify what they are doing before intervening.',trigger:'🌾 Harvest windows and freshly planted seedlings',warnings:[{i:'🔴',t:'Peck marks in ripening fruit.'},{i:'🐦',t:'Cattle egrets in rows — may be eating armyworm larvae, not crops.'}],levels:[{n:1,title:'Physical exclusion only',col:'#1E4D35',tag:'Only effective method',tb:'#D8F3DC',tc:'#1E4D35',actions:['Bird netting — most effective. Cover beds during ripening, lift for harvest.','Reflective tape or foil strips — rotate position every 3 days or birds habituate.','Observe first — cattle egrets during an armyworm outbreak are helping you enormously.'],timing:'Install before fruit ripens · Rotate scare devices every 3 days'}],avoid:'No chemical controls for birds. Never harm native or beneficial species.',tip:'Birds eating insects in your field are part of your pest management. One cattle egret eating armyworm larvae saves you a spray application.'},
-];
-
-const DISEASES=[
-{id:'powdery_mildew',emoji:'⬜',name:'Powdery mildew',short:'White powder — dry conditions, warm days',desc:'Fungal disease causing white powdery coating on leaves. Unlike most fungi, it thrives in DRY conditions with warm days and cool nights.',trigger:'🌡️ Warm days, cool nights, poor airflow. Does NOT need wet conditions.',warnings:[{i:'⬜',t:'White powdery coating on upper leaf surfaces. Spreads rapidly across the bed.'},{i:'🟡',t:'Yellowing beneath the powdery coating.'},{i:'📈',t:'Often starts on one plant and spreads to an entire bed within days.'}],levels:[{n:1,title:'Cultural management',col:'#1E4D35',tag:'Start here',tb:'#D8F3DC',tc:'#1E4D35',actions:['Improve airflow — prune inner leaves, adequate spacing is critical.','Water at base only, never overhead — morning watering so foliage stays dry.','Remove infected leaves immediately — dispose away from farm. Do not compost.'],timing:'Continuous · Remove infected material every scouting'},{n:3,title:'Organic spray',col:'#E9A825',tag:'Active infection',tb:'#FEF8E7',tc:'#7A5C1E',actions:['Potassium bicarbonate — most effective organic fungicide for powdery mildew.','Milk spray (10% milk in water) — scientifically proven effective. Spray weekly.','Neem oil — preventive and early treatment. Evening spray only.'],timing:'Morning or evening · Every 7 days preventively, every 5 days if active.'}],avoid:'Overhead irrigation. Overcrowding. High nitrogen fertilization.',tip:'Milk spray: 1 part whole milk, 9 parts water, spray weekly. Validated in peer-reviewed trials to be as effective as many conventional fungicides.'},
-{id:'early_blight',emoji:'🎯',name:'Early blight',short:'Target-ring spots, starts on lower leaves',desc:'Alternaria solani — causes dark brown lesions with concentric rings (target pattern) on leaves. Starts on oldest lower leaves and progresses upward.',trigger:'🌡️ Warm humid conditions, nutritionally stressed plants',warnings:[{i:'🎯',t:'Dark brown lesions with concentric rings — the target pattern is diagnostic.'},{i:'⬇️',t:'Starts on LOWER, OLDER leaves and progresses upward.'},{i:'🟡',t:'Yellow halo around dark lesions.'}],levels:[{n:1,title:'Cultural',col:'#1E4D35',tag:'Prevention',tb:'#D8F3DC',tc:'#1E4D35',actions:['Remove infected lower leaves at first sign — do not compost.','Mulch heavily — prevents soil splash which carries spores to lower leaves.','Calcium and balanced NPK — stressed plants are far more susceptible.'],timing:'Preventive · Remove infected leaves every inspection'},{n:3,title:'Organic spray',col:'#E9A825',tag:'Active infection',tb:'#FEF8E7',tc:'#7A5C1E',actions:['Copper hydroxide fungicide — most effective organic option.','Bacillus subtilis QST 713 (Serenade) — effective preventively and in early infection.','Neem oil — some antifungal activity. Evening spray only.'],timing:'Morning when leaves are dry · Every 7 days before rain events.'}],avoid:'Overhead irrigation. Overcrowded planting. Leaving infected material on soil.',tip:'Begin copper applications before disease appears if conditions are warm and humid. Prevention is far easier than stopping an established infection.'},
-{id:'fusarium',emoji:'🥀',name:'Fusarium wilt',short:'One-sided wilt, brown inside stem — no cure',desc:'Soil-borne pathogen that blocks water movement inside the plant. Plants wilt despite adequate irrigation. There is no cure — prevention and rotation are the only strategy.',trigger:'🌡️ Warm soil above 25°C. Persists in soil for 10+ years.',warnings:[{i:'🥀',t:'Wilting that starts on one side of the plant — asymmetric wilting is characteristic.'},{i:'💧',t:'Plant wilts DESPITE adequate soil moisture.'},{i:'🟤',t:'Cut the stem near the base — brown vascular discoloration is the definitive diagnostic.'}],levels:[{n:1,title:'Remove, rotate, solarize',col:'#1E4D35',tag:'Only strategy',tb:'#D8F3DC',tc:'#1E4D35',actions:['Remove and destroy infected plants immediately — do NOT compost.','Crop rotation — minimum 3 seasons before replanting susceptible crops in affected beds.','Soil solarization — 4–6 weeks clear plastic in hottest season reduces viable spore load.','Use Fusarium-resistant varieties — look for the "F" designation on tomato varieties.'],timing:'Long-term soil management'}],avoid:'Any curative spray — there is no treatment once a plant is infected.',tip:'Mark any bed where Fusarium wilt appears. Do not plant tomatoes, peppers, or eggplant in that location for a minimum of 3 seasons.'},
-{id:'downy_mildew',emoji:'🟣',name:'Downy mildew',short:'Angular yellow patches, purple fuzz below',desc:'Water mold causing yellow angular patches on upper leaf surfaces with purple/grey growth on undersides. Spreads explosively in wet cool conditions.',trigger:'🌧️ Cool moist conditions, overhead irrigation',warnings:[{i:'🟡',t:'Yellow angular patches on upper leaf surfaces bounded by leaf veins.'},{i:'🟣',t:'Purple or grey fuzzy growth on undersides of yellow patches — key identification.'},{i:'📈',t:'Spreads across an entire bed in 48–72 hours in humid conditions.'}],levels:[{n:1,title:'Cultural — prevention',col:'#1E4D35',tag:'Primary intervention',tb:'#D8F3DC',tc:'#1E4D35',actions:['Drip irrigation only — overhead irrigation is the primary trigger.','Improve airflow — adequate plant spacing.','Remove and destroy infected material immediately.'],timing:'Continuous preventive management'},{n:3,title:'Organic spray',col:'#E9A825',tag:'Active infection',tb:'#FEF8E7',tc:'#7A5C1E',actions:['Copper hydroxide or copper sulfate — most effective organic option.','Potassium phosphonate — systemic, triggers plant immune response.'],timing:'Morning when leaves are dry · Every 7–10 days before rain events.'}],avoid:'Any overhead irrigation.',tip:'Switching to drip irrigation removes the single biggest risk factor. The moment you eliminate overhead watering, you eliminate most downy mildew pressure.'},
-{id:'root_rot',emoji:'🟤',name:'Root rot',short:'Mushy roots — drainage and overwatering',desc:'Water mold and fungal pathogens that colonize roots in waterlogged conditions. In Bahamian limestone soils this is one of the most common causes of plant failure.',trigger:'💧 Overwatering, poor drainage, flat-planted limestone soil',warnings:[{i:'📉',t:'Plant wilting despite adequate or excessive irrigation.'},{i:'🟤',t:'Pull the plant — brown mushy roots that disintegrate. Healthy roots are white and firm.'},{i:'🌧️',t:'Worse in low areas of the farm after heavy rain.'}],levels:[{n:1,title:'Address drainage immediately',col:'#1E4D35',tag:'Primary intervention',tb:'#D8F3DC',tc:'#1E4D35',actions:['Raise beds — minimum 6 inches above flat grade. Bahamian limestone creates a natural impermeable bathtub. Raised beds are not optional.','Reduce irrigation immediately — allow soil to dry between waterings.','Remove and dispose of affected plants.'],timing:'Immediate action'},{n:2,title:'Biological prevention',col:'#2D6A4F',tag:'Preventive',tb:'#EBF5EE',tc:'#2D6A4F',actions:['Trichoderma harzianum inoculant — apply to soil at planting.','Bacillus subtilis QST 713 (Serenade) soil drench.'],timing:'At planting · Monthly'}],avoid:'Planting into flat unraised beds in limestone soil.',tip:'In Bahamian limestone soil, flat planting is asking for root rot. Raised beds are the foundational practice that prevents this.'},
-{id:'ylcv',emoji:'🌀',name:'Tomato yellow leaf curl virus',short:'TYLCV — whitefly-transmitted, no cure',desc:'Virus transmitted exclusively by whitefly (Bemisia tabaci). No curative treatment exists — whitefly control and early removal are the only responses.',trigger:'🦟 Wherever Bemisia tabaci (whitefly) populations are present',warnings:[{i:'🌀',t:'Leaf margins curling upward and inward — the distinctive cupped leaf is diagnostic.'},{i:'💛',t:'Interveinal and marginal chlorosis on leaves.'},{i:'📉',t:'Severe stunting — new growth extremely small and distorted.'}],levels:[{n:1,title:'Prevent and remove',col:'#1E4D35',tag:'No treatment exists',tb:'#D8F3DC',tc:'#1E4D35',actions:['Reflective silver mulch at planting — most effective whitefly deterrent.','Yellow sticky traps — monitor Bemisia populations before they build up.','Remove and destroy infected plants immediately — infected plants spread virus to every whitefly that feeds on them.','Use TYLCV-resistant varieties.'],timing:'Preventive — before planting · Monitor continuously'}],avoid:'Delaying removal of infected plants hoping for recovery. There is no recovery.',tip:'One TYLCV-infected plant is a virus source for every whitefly that feeds on it. Remove infected plants the moment you identify them.'},
-{id:'sooty_mold',emoji:'⬛',name:'Sooty mold',short:'Black coating — treat the pest causing it',desc:'Saprophytic fungi that colonize honeydew excreted by aphids, whiteflies, mealybugs. Not directly parasitic but signals an active sucking pest problem.',trigger:'🐛 Wherever honeydew-producing insects are feeding',warnings:[{i:'⬛',t:'Black sooty coating on leaves — grows only on honeydew deposits.'},{i:'🐜',t:'Ants active on plant stems — farming honeydew-producing insects.'}],levels:[{n:1,title:'Find and treat the pest',col:'#1E4D35',tag:'Treat cause not symptom',tb:'#D8F3DC',tc:'#1E4D35',actions:['Identify and treat the honeydew-producing pest — aphids, whiteflies, or mealybugs. Once honeydew stops, sooty mold disappears.','Wipe mold off leaves with a damp cloth — restores photosynthesis immediately.'],timing:'Treat the pest first'}],avoid:'Treating sooty mold without identifying and addressing the pest causing it — it returns immediately.',tip:'Sooty mold is a symptom. Find the insect colony causing it. Treat that. The mold disappears on its own once honeydew stops.'},
-{id:'gummy_stem',emoji:'💧',name:'Gummy stem blight',short:'Amber ooze on cucurbit stems',desc:'Fungal pathogen causing amber gummy exudate on stems of cucumbers and squash. Enters through wounds and wet conditions.',trigger:'🌧️ Warm wet conditions. Stem wounds create entry points.',warnings:[{i:'💧',t:'Amber or brown gummy exudate dripping from stem lesions — highly distinctive and diagnostic.'},{i:'🟤',t:'Water-soaked brown lesions on stems, particularly at soil level.'},{i:'🍂',t:'Foliage beyond the lesion point yellowing and wilting.'}],levels:[{n:1,title:'Cultural prevention',col:'#1E4D35',tag:'Prevention',tb:'#D8F3DC',tc:'#1E4D35',actions:['Avoid stem wounds — entry point management is the primary prevention.','Drip irrigation only — wet stems and foliage create optimal infection conditions.','Remove and destroy infected material immediately.'],timing:'Preventive'},{n:3,title:'Organic spray',col:'#E9A825',tag:'Active infection',tb:'#FEF8E7',tc:'#7A5C1E',actions:['Copper hydroxide fungicide — apply to stems and foliage at first lesion sign.','Bacillus subtilis QST 713 (Serenade) — preventive and early treatment.'],timing:'Morning when plants are dry · Every 7–10 days'}],avoid:'Overhead irrigation on cucurbits. Mechanical damage to stems.',tip:'Didymella enters exclusively through wounds. Be careful with tools and trellis ties around cucurbit stems.'},
-];
-
-const DEFS=[
-{id:'nitrogen',cat:'Macronutrients',emoji:'🟡',name:'Nitrogen deficiency',short:'Yellowing from old leaves upward',desc:'Nitrogen is mobile — deficiency appears first on oldest leaves as the plant cannibalises nitrogen from older tissue to support new growth.',trigger:'Sandy or limestone soils, heavy leaching after rain',warnings:[{i:'⬇️',t:'Chlorosis starts on LOWER, OLDER leaves and progresses upward.'},{i:'🌿',t:'Overall pale, light green appearance across the entire plant.'},{i:'📉',t:'Slow growth, thin spindly stems, reduced vigour.'}],levels:[{n:1,title:'Organic correction',col:'#1E4D35',tag:'Fast response available',tb:'#D8F3DC',tc:'#1E4D35',actions:['Fish emulsion or fish hydrolysate — fast-acting. Apply as soil drench or foliar spray.','Compost tea drench — provides available nitrogen plus beneficial microbiome.','Blood meal (12-0-0) — high nitrogen organic amendment.'],timing:'Foliar for fastest response · Every 7–10 days until green'}],avoid:'Over-application — excess nitrogen promotes excessive vegetative growth and aphid attraction.',tip:'Chlorosis from the bottom up = nitrogen. Chlorosis from the top down = likely iron or sulfur. Direction is the key differentiator.'},
-{id:'iron_def',cat:'Micronutrients',emoji:'🔴',name:'Iron deficiency',short:'Interveinal chlorosis on young leaves only',desc:'Iron is immobile — deficiency appears exclusively on youngest growth. In Bahamian soils, almost always a pH-induced deficiency, not an actual iron shortage.',trigger:'High pH limestone soils above pH 7.0',warnings:[{i:'⬆️',t:'Interveinal chlorosis on YOUNG leaves only — veins stay green while lamina turns yellow.'},{i:'🌱',t:'Only new and young growth affected.'}],levels:[{n:1,title:'Correct pH first',col:'#1E4D35',tag:'pH is the real problem',tb:'#D8F3DC',tc:'#1E4D35',actions:['Check and lower soil pH — Fe2+ becomes available between pH 5.5–6.5. Use elemental sulfur or acidified compost.','Chelated iron (Fe-EDTA or Fe-DTPA) — apply as soil drench or foliar.','Iron sulfate + citric acid foliar spray — fast-acting.'],timing:'Foliar for fast response · Every 10–14 days until colour returns'}],avoid:'Applying non-chelated iron without pH correction — the iron is immediately immobilized again.',tip:'Iron deficiency in Bahamian limestone soils is almost always a pH problem. The soil contains iron — it is locked up at pH 7.5+. Focus on organic matter and pH correction first.'},
-{id:'magnesium_def',cat:'Micronutrients',emoji:'💚',name:'Magnesium deficiency',short:'Interveinal chlorosis on older leaves',desc:'Magnesium is mobile and the central atom of the chlorophyll molecule. Deficiency causes interveinal chlorosis on older leaves. Epsom salt spray is one of the fastest corrections available.',trigger:'Sandy soils, excessive rainfall leaching, excess potassium competing',warnings:[{i:'💚',t:'Chlorosis BETWEEN the veins — veins stay green while tissue between turns yellow. Older leaves first.'},{i:'⬇️',t:'Starts on OLDER, LOWER leaves.'}],levels:[{n:1,title:'Epsom salt foliar spray',col:'#1E4D35',tag:'Fast and effective',tb:'#D8F3DC',tc:'#1E4D35',actions:['Magnesium sulfate (Epsom salt) foliar spray — 2 tablespoons per gallon of water. Apply in the evening. Visible improvement in 5–7 days.','Dolomitic limestone — incorporate at bed preparation for long-term.'],timing:'Foliar every 7–10 days · Until symptoms clear'}],avoid:'Over-application of calcium or potassium — cationic competition blocks magnesium uptake.',tip:'Epsom salt foliar spray: 2 tablespoons per gallon, evening spray. Visible greening within 5–7 days — one of the fastest nutrient corrections available.'},
-{id:'calcium_def',cat:'Macronutrients',emoji:'⬜',name:'Calcium deficiency',short:'Blossom end rot, tip burn — irrigation issue',desc:'Calcium is immobile — deficiency affects new growth first. The most common presentation is blossom end rot caused by inconsistent irrigation, not a calcium shortage.',trigger:'Irregular irrigation — the #1 cause even when calcium is present in soil',warnings:[{i:'⬛',t:'Blossom end rot — darkened sunken leathery lesion on the blossom end of tomatoes, peppers, or squash.'},{i:'🌿',t:'Tip burn on lettuce — brown papery tips on young inner leaves.'},{i:'🌀',t:'Distorted or blistered new growth.'}],levels:[{n:1,title:'Consistent irrigation first',col:'#1E4D35',tag:'Watering solves most cases',tb:'#D8F3DC',tc:'#1E4D35',actions:['Consistent even irrigation is the primary fix — irregular watering causes calcium deficiency symptoms even when soil calcium is adequate.','Calcium chloride or calcium nitrate foliar spray — direct application to new growth and developing fruit.','Gypsum (calcium sulfate) — soil application. Adds calcium without affecting pH.'],timing:'Foliar every 7 days during fruiting · Preventive from transplanting'}],avoid:'Inconsistent irrigation. Over-application of potassium or magnesium.',tip:'Blossom end rot is a calcium transport disorder caused by irregular irrigation, not necessarily a calcium shortage. Even irrigation is the treatment.'},
-{id:'phosphorus_def',cat:'Macronutrients',emoji:'🟣',name:'Phosphorus deficiency',short:'Purple undersides, poor root and fruit development',desc:'Phosphorus is critical for ATP production, root development, and reproductive growth. Common in cool soils and soils with pH imbalance.',trigger:'Soil pH below 6.0 or above 7.5',warnings:[{i:'🟣',t:'Purple or reddish-purple on leaf undersides and stems — most distinctive sign.'},{i:'📉',t:'Overall dark green or dull appearance with reduced vigour.'},{i:'🌸',t:'Delayed or reduced flowering and fruit set.'}],levels:[{n:1,title:'Correct pH first',col:'#1E4D35',tag:'pH correction',tb:'#D8F3DC',tc:'#1E4D35',actions:['Check and correct pH to 6.0–6.8 — phosphate availability drops sharply outside this range.','Bone meal (calcium phosphate) — slow-release. Incorporate at bed preparation.','Liquid seaweed extract — contains available phosphate for foliar application.'],timing:'At planting or when symptoms appear · Monthly'}],avoid:'Phosphorus applications without pH correction — the nutrient will be immobilized immediately.',tip:'Reddish purple leaf undersides in cool weather can be a temporary low-temperature response. If it persists into warm weather, treat.'},
-{id:'potassium_def',cat:'Macronutrients',emoji:'🟠',name:'Potassium deficiency',short:'Marginal leaf scorch, poor fruit quality',desc:'Potassium is mobile — deficiency appears on older leaves first. Critical for stomatal function and carbohydrate loading into fruit.',trigger:'Sandy or leached soils, excessive irrigation, high calcium competing',warnings:[{i:'🟫',t:'Marginal leaf scorch — brown necrotic margins starting at tips and edges.'},{i:'🍅',t:'Small, poorly coloured, or misshapen fruit with reduced brix.'}],levels:[{n:1,title:'Organic correction',col:'#1E4D35',tag:'Foliar + soil',tb:'#D8F3DC',tc:'#1E4D35',actions:['Potassium sulfate (K2SO4) — most available organic form. Dissolve and drench root zone.','Liquid seaweed extract — contains available potassium for foliar application.'],timing:'Soil drench and foliar · Every 14 days'}],avoid:'Wood ash in soils that are not acidic — raises pH further.',tip:'Potassium deficiency and drought stress both cause brown leaf margins. Confirm adequate soil moisture before treating for K deficiency.'},
-{id:'phytotox',cat:'Phytotoxicity',emoji:'☠️',name:'Spray phytotoxicity',short:'Chemical burn — pattern matches spray coverage',desc:'Phytotoxic damage from incorrect product application — too high a concentration, application in heat, or incompatible tank mix.',trigger:'Midday application, temperature above 28°C, excess concentration',warnings:[{i:'🔥',t:'Brown or bleached lesions in a regular pattern matching spray coverage.'},{i:'⬆️',t:'Symptoms develop 24–48 hours after a spray application — timing is diagnostic.'},{i:'🌿',t:'Both old and new growth affected simultaneously.'}],levels:[{n:1,title:'Stop spray and support plant',col:'#1E4D35',tag:'Immediate response',tb:'#D8F3DC',tc:'#1E4D35',actions:['Stop the spray program immediately.','Rinse affected foliage with clean water if the application was within 4 hours.','Reduce all additional plant stressors — consistent irrigation, no fertilizer for 10 days.','Remove severely necrotic leaves — will not recover and become disease entry points.'],timing:'Immediately · Resume sprays only after 10+ days recovery'}],avoid:'Any application above 28°C. Midday application in any season. Mixing products without compatibility verification.',tip:'Always spray in the evening or early morning. Test any new product on a single plant first — wait 48 hours before applying to the entire bed.'},
-{id:'salt_tox',cat:'Phytotoxicity',emoji:'🧂',name:'Salt / fertilizer burn',short:'Marginal scorch after fertilizing',desc:'Osmotic stress from excess soluble salts — fertilizer over-application raises EC in the root zone, preventing water uptake.',trigger:'Over-application of soluble fertilizers, coastal salt spray',warnings:[{i:'🟤',t:'Brown crispy leaf margins after a fertilizer application.'},{i:'💧',t:'Wilting despite adequate irrigation — osmotic stress prevents water uptake.'}],levels:[{n:1,title:'Leach and reduce',col:'#1E4D35',tag:'Flush the salts',tb:'#D8F3DC',tc:'#1E4D35',actions:['Heavy deep irrigation — thoroughly drench soil to leach excess salts below root zone.','Stop all fertilization until plants show full recovery.','Add compost — organic matter buffers against salt-induced osmotic stress.'],timing:'Immediate deep irrigation · Resume fertilizer only after 2–3 weeks'}],avoid:'Soluble fertilizers at rates above recommendations. Fertilizing during drought when salts concentrate.',tip:'Less is more with soluble fertilizers. Dilute applications at more frequent intervals is safer and more effective than heavy infrequent applications.'},
-];
-
-const DIAG_TREE={q:'Where do you see the problem?',sub:'Look at your plant carefully.',options:[
-{i:'🌿',t:'On the leaves',s:'Holes, yellowing, coating, trails',next:{q:'What does the leaf damage look like?',sub:'Look closely at the pattern.',options:[
-{i:'🕳️',t:'Ragged holes — large chunks missing',s:'Irregular chewed areas',r:'armyworms'},
-{i:'〰️',t:'Winding pale trails inside the leaf',s:'Tunnels visible from outside',r:'leafminers'},
-{i:'✨',t:'Sticky coating, yellowing, black mold',s:'Honeydew and sooty mold',next:{q:'What do you see on the leaf undersides?',sub:'Look carefully — they hide underneath.',options:[
-{i:'🤏',t:'Tiny clustered insects',s:'Pear-shaped, green, black, or yellow',r:'aphids'},
-{i:'☁️',t:'White cloud when plant is shaken',s:'Flying insects on undersides',r:'whiteflies'},
-{i:'🤍',t:'White cottony clusters in stem joints',s:'Waxy coating',r:'mealybugs'},
-{i:'🕸️',t:'Fine webbing + bronze stippling on top',s:'Microscopic moving dots possible',r:'spidermites'},
-]}},
-{i:'⬜',t:'White powdery coating on leaf surfaces',s:'Dry powder, not wet',r:'powdery_mildew'},
-{i:'🎯',t:'Dark spots with concentric ring pattern',s:'Target or bull's eye rings',r:'early_blight'},
-{i:'🟣',t:'Angular yellow patches — purple fuzz on underside',s:'Bounded by leaf veins',r:'downy_mildew'},
-{i:'💛',t:'Yellowing — no obvious insects',s:'Discoloration without pests',next:{q:'Where is the yellowing?',sub:'Location and pattern identifies the cause.',options:[
-{i:'⬇️',t:'Starts on bottom and oldest leaves',s:'Upper leaves stay green longest',r:'nitrogen'},
-{i:'⬆️',t:'Starts on top and newest leaves',s:'Lower leaves stay green',r:'iron_def'},
-{i:'💚',t:'Yellow between veins — veins stay green',s:'Interveinal chlorosis',r:'magnesium_def'},
-{i:'🟣',t:'Purple undersides',s:'Alongside or before yellowing',r:'phosphorus_def'},
-]}},
-{i:'🔥',t:'Brown patches matching spray coverage',s:'Appeared 24–48 hrs after spraying',r:'phytotox'},
-]}},
-{i:'🌱',t:'Seedlings severed at soil level overnight',s:'Clean cuts at the base',r:'cutworms'},
-{i:'🐌',t:'Silvery slime trails and irregular holes',s:'Trails on leaves or soil',r:'slugs'},
-{i:'💧',t:'Gummy amber ooze on stems',s:'Cucumbers or squash',r:'gummy_stem'},
-{i:'🌿',t:'Plant declining — suspected root problem',s:'Declining despite normal care',next:{q:'What do the roots look like?',sub:'Pull a plant and inspect the roots.',options:[
-{i:'🟤',t:'Brown mushy roots that fall apart',s:'Healthy roots are white and firm',r:'root_rot'},
-{i:'🥀',t:'Roots look ok but plant wilts despite watering',s:'Possible vascular blockage',r:'fusarium'},
-]}},
-{i:'🌀',t:'Leaves curling, stunted, whiteflies present',s:'Viral disease symptoms',r:'ylcv'},
-{i:'⬛',t:'Black sooty coating on leaves',s:'Sticky below, black coating above',r:'sooty_mold'},
-{i:'🧂',t:'Brown leaf margins after fertilizing',s:'Appeared after fertilizer application',r:'salt_tox'},
-]};
-
-// LIBRARY STATE
-let libHistory=[];
-let libDiagNode=DIAG_TREE,libDiagStack=[];
-let libCurrentPestCat=PCATS[0],libCurrentDefCat=DCATS[0];
-
-window.libGoto=section=>{
-  ['lib-home','lib-damage','lib-pests','lib-diseases','lib-deficiencies','lib-detail'].forEach(id=>{
-    const el=document.getElementById(id);if(el)el.style.display='none';
-  });
-  const el=document.getElementById('lib-'+section);if(el)el.style.display='block';
-  libHistory.push(section);
-  if(section==='pests')renderPestGrid(libCurrentPestCat);
-  if(section==='diseases')renderDiseaseGrid();
-  if(section==='deficiencies')renderDefGrid(libCurrentDefCat);
-  if(section==='damage'){libDiagNode=DIAG_TREE;libDiagStack=[];renderDiagQ();}
-  const tb=document.getElementById('tab-body');if(tb)tb.scrollTo(0,0);
-};
-
-window.libBack=()=>{
-  libHistory.pop();
-  if(libHistory.length===0){
-    ['lib-home','lib-damage','lib-pests','lib-diseases','lib-deficiencies','lib-detail'].forEach(id=>{
-      const el=document.getElementById(id);if(el)el.style.display='none';
-    });
-    document.getElementById('lib-home').style.display='block';
-    libHistory=[];
-    return;
-  }
-  const prev=libHistory[libHistory.length-1];
-  ['lib-home','lib-damage','lib-pests','lib-diseases','lib-deficiencies','lib-detail'].forEach(id=>{
-    const el=document.getElementById(id);if(el)el.style.display='none';
-  });
-  const el=document.getElementById('lib-'+prev);if(el)el.style.display='block';
-  if(prev==='damage'&&libDiagStack.length>0){libDiagNode=libDiagStack.pop();renderDiagQ();}
-  const tb=document.getElementById('tab-body');if(tb)tb.scrollTo(0,0);
-};
-
-function renderDiagQ(){
-  const depth=libDiagStack.length+1;
-  const stepEl=document.getElementById('lib-q-step');
-  const progEl=document.getElementById('lib-q-prog');
-  const titleEl=document.getElementById('lib-q-title');
-  const subEl=document.getElementById('lib-q-sub');
-  const optsEl=document.getElementById('lib-q-opts');
-  if(!stepEl)return;
-  stepEl.textContent='Step '+depth;
-  if(progEl)progEl.style.width=Math.min(depth/5*100,100)+'%';
-  if(titleEl)titleEl.textContent=libDiagNode.q;
-  if(subEl)subEl.textContent=libDiagNode.sub;
-  if(!optsEl)return;
-  optsEl.innerHTML='';
-  libDiagNode.options.forEach(opt=>{
-    const btn=document.createElement('button');
-    btn.style.cssText='width:100%;background:var(--cream);border:2px solid #DDE8DE;border-radius:var(--rsm);padding:13px 14px;margin-bottom:8px;cursor:pointer;text-align:left;font-family:DM Sans,sans-serif;font-size:13px;font-weight:500;color:var(--dark);display:flex;align-items:center;gap:11px';
-    btn.innerHTML=`<span style="font-size:18px;width:24px;text-align:center;flex-shrink:0">${opt.i}</span><div><div>${opt.t}</div>${opt.s?`<div style="font-size:11px;color:var(--muted);margin-top:1px">${opt.s}</div>`:''}</div>`;
-    btn.onclick=()=>{
-      if(opt.r){showLibItem(opt.r);}
-      else if(opt.next){libDiagStack.push(libDiagNode);libDiagNode=opt.next;renderDiagQ();}
-    };
-    optsEl.appendChild(btn);
-  });
-}
-
-function renderPestGrid(cat){
-  libCurrentPestCat=cat;
-  const tabsEl=document.getElementById('lib-pest-tabs');
-  const gridEl=document.getElementById('lib-pest-grid');
-  if(!tabsEl||!gridEl)return;
-  tabsEl.innerHTML='';
-  PCATS.forEach(c=>{
-    const btn=document.createElement('button');
-    btn.className='lib-tab'+(c===cat?' on':'');
-    btn.textContent=c;
-    btn.onclick=()=>renderPestGrid(c);
-    tabsEl.appendChild(btn);
-  });
-  gridEl.innerHTML='';
-  PESTS.filter(p=>p.cat===cat).forEach(p=>{
-    const tile=document.createElement('div');
-    tile.className='lib-tile';
-    tile.innerHTML=`<div class="lib-tile-ico">${p.emoji}</div><div class="lib-tile-name">${p.name}</div><div class="lib-tile-short">${p.short}</div>`;
-    tile.onclick=()=>showLibItem(p.id);
-    gridEl.appendChild(tile);
-  });
-}
-
-function renderDiseaseGrid(){
-  const gridEl=document.getElementById('lib-disease-grid');
-  if(!gridEl)return;
-  gridEl.innerHTML='';
-  DISEASES.forEach(d=>{
-    const tile=document.createElement('div');
-    tile.className='lib-tile';
-    tile.innerHTML=`<div class="lib-tile-ico">${d.emoji}</div><div class="lib-tile-name">${d.name}</div><div class="lib-tile-short">${d.short}</div>`;
-    tile.onclick=()=>showLibItem(d.id);
-    gridEl.appendChild(tile);
-  });
-}
-
-function renderDefGrid(cat){
-  libCurrentDefCat=cat;
-  const tabsEl=document.getElementById('lib-def-tabs');
-  const gridEl=document.getElementById('lib-def-grid');
-  if(!tabsEl||!gridEl)return;
-  tabsEl.innerHTML='';
-  DCATS.forEach(c=>{
-    const btn=document.createElement('button');
-    btn.className='lib-tab'+(c===cat?' on':'');
-    btn.textContent=c;
-    btn.onclick=()=>renderDefGrid(c);
-    tabsEl.appendChild(btn);
-  });
-  gridEl.innerHTML='';
-  DEFS.filter(d=>d.cat===cat).forEach(d=>{
-    const tile=document.createElement('div');
-    tile.className='lib-tile';
-    tile.innerHTML=`<div class="lib-tile-ico">${d.emoji}</div><div class="lib-tile-name">${d.name}</div><div class="lib-tile-short">${d.short}</div>`;
-    tile.onclick=()=>showLibItem(d.id);
-    gridEl.appendChild(tile);
-  });
-}
-
-function showLibItem(id){
-  const item=PESTS.find(x=>x.id===id)||DISEASES.find(x=>x.id===id)||DEFS.find(x=>x.id===id);
-  if(!item)return;
-  const type=PESTS.find(x=>x.id===id)?'pest':DISEASES.find(x=>x.id===id)?'disease':'deficiency';
-  const heroBg=type==='disease'?'#6C3483':type==='deficiency'?'#D35400':'#1E4D35';
-  const hero=document.getElementById('lib-det-hero');
-  if(hero)hero.style.background=heroBg;
-  const nm=document.getElementById('lib-det-name');if(nm)nm.textContent=item.name;
-  const em=document.getElementById('lib-det-emoji');if(em)em.textContent=item.emoji;
-  const ti=document.getElementById('lib-det-title');if(ti)ti.textContent=item.name;
-  const desc=document.getElementById('lib-det-desc');if(desc)desc.textContent=item.desc;
-  const trig=document.getElementById('lib-det-trigger');if(trig)trig.textContent=item.trigger;
-  const warnLbl=document.getElementById('lib-warn-lbl');
-  if(warnLbl)warnLbl.textContent=type==='deficiency'?'🔍 How to identify':'🚨 Early warning signs';
-  const actLbl=document.getElementById('lib-act-lbl');
-  if(actLbl)actLbl.textContent=type==='deficiency'?'🧪 How to fix it':'⚡ Action plan — start light, escalate';
-  const avLbl=document.getElementById('lib-av-lbl');
-  if(avLbl)avLbl.textContent=type==='deficiency'?'⚠️ Common mistakes':'⛔ Avoid these';
-  const tipLbl=document.getElementById('lib-tip-lbl');
-  if(tipLbl)tipLbl.textContent=type==='deficiency'?'💡 Diagnosis tip':'💡 Farmer tip';
-  const tipBox=document.getElementById('lib-det-tip-box');
-  if(tipBox)tipBox.style.background=type==='disease'?'#F5EEF8':type==='deficiency'?'#FEF9F0':'#EBF5EE';
-  const warns=document.getElementById('lib-det-warnings');
-  if(warns)warns.innerHTML=(item.warnings||[]).map(w=>`<div class="lib-warn-item"><span class="lib-warn-ico">${w.i}</span><div class="lib-warn-txt">${w.t}</div></div>`).join('');
-  const levs=document.getElementById('lib-det-levels');
-  if(levs){
-    levs.innerHTML='';
-    (item.levels||[]).forEach((lv,i)=>{
-      const div=document.createElement('div');
-      div.className='lib-level'+(i===0?' open':'');
-      div.innerHTML=`<div class="lib-level-hdr" style="background:${lv.col}" onclick="this.parentElement.classList.toggle('open');this.querySelector('.lib-level-chev').textContent=this.parentElement.classList.contains('open')?'▲':'▼'"><div class="lib-level-num">${lv.n}</div><div class="lib-level-title">${lv.title}</div><div class="lib-level-tag" style="background:${lv.tb};color:${lv.tc}">${lv.tag}</div><span class="lib-level-chev">${i===0?'▲':'▼'}</span></div><div class="lib-level-body">${(lv.actions||[]).map(a=>`<div class="lib-action"><div class="lib-action-dot" style="background:${lv.col}"></div><div class="lib-action-txt">${a}</div></div>`).join('')}<div class="lib-timing"><span class="lib-timing-item">🕐 <span>${lv.timing}</span></span></div></div>`;
-      levs.appendChild(div);
-    });
-  }
-  const avoid=document.getElementById('lib-det-avoid');if(avoid)avoid.textContent=item.avoid;
-  const tip=document.getElementById('lib-det-tip');if(tip)tip.textContent=item.tip;
-  libHistory.push('detail');
-  ['lib-home','lib-damage','lib-pests','lib-diseases','lib-deficiencies'].forEach(id=>{
-    const el=document.getElementById(id);if(el)el.style.display='none';
-  });
-  document.getElementById('lib-detail').style.display='block';
-  const tb=document.getElementById('tab-body');if(tb)tb.scrollTo(0,0);
-}
 
 // AUTH STATE
 onAuthStateChanged(auth,async user=>{
