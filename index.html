@@ -376,13 +376,196 @@ html,body{height:100%;font-family:'DM Sans',system-ui,sans-serif;background:var(
 .tb-done{border-color:var(--g);color:var(--g);}
 .tb-part{border-color:var(--amber);color:var(--amber);}
 .tb-block{border-color:var(--red);color:var(--red);}
+
+/* ── SIGN-IN / ONBOARDING ── */
+.auth-screen{min-height:100vh;background:linear-gradient(160deg,var(--gd) 0%,#3A7012 60%,var(--g) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;}
+.auth-card{background:var(--cream);border-radius:20px;padding:28px 24px 32px;width:100%;max-width:420px;}
+.auth-logo{font-family:'Playfair Display',serif;font-size:32px;font-weight:800;color:white;text-align:center;margin-bottom:6px;}
+.auth-tagline{font-size:13px;color:rgba(255,255,255,.65);text-align:center;margin-bottom:24px;}
+.auth-tab-row{display:flex;background:var(--gll);border-radius:10px;padding:3px;margin-bottom:20px;}
+.auth-tab{flex:1;border:none;background:none;border-radius:8px;padding:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;color:var(--muted);transition:all .15s;}
+.auth-tab.active{background:var(--g);color:white;}
+.ob-step{display:none;}.ob-step.active{display:block;}
+.ob-progress{display:flex;gap:6px;margin-bottom:20px;}
+.ob-dot{flex:1;height:4px;background:var(--sand);border-radius:2px;}
+.ob-dot.done{background:var(--g);}
+.ob-ttl{font-family:'Playfair Display',serif;font-size:20px;font-weight:800;color:var(--text);margin-bottom:4px;}
+.ob-sub{font-size:12px;color:var(--muted);margin-bottom:18px;line-height:1.5;}
+.ob-options{display:flex;flex-direction:column;gap:8px;}
+.ob-opt{border:2px solid var(--border);border-radius:12px;padding:12px 14px;cursor:pointer;transition:all .15s;background:white;text-align:left;width:100%;font-family:inherit;}
+.ob-opt:hover{border-color:var(--gold);}
+.ob-opt.sel{border-color:var(--g);background:var(--gll);}
+.ob-opt-nm{font-size:13px;font-weight:700;color:var(--text);}
+.ob-opt-sb{font-size:11px;color:var(--muted);margin-top:2px;}
+.ob-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.auth-divider{text-align:center;font-size:11px;color:var(--muted);margin:14px 0;position:relative;}
+.auth-divider::before{content:'';position:absolute;top:50%;left:0;right:0;height:1px;background:var(--border);}
+.auth-divider span{background:var(--cream);padding:0 10px;position:relative;}
+
+/* ── PROFILE PAGE ── */
+.profile-avatar{width:72px;height:72px;border-radius:50%;background:var(--g);display:flex;align-items:center;justify-content:center;font-size:28px;color:white;font-weight:800;font-family:'Playfair Display',serif;margin-bottom:12px;}
+.profile-section{background:var(--card);border-radius:14px;border:1px solid var(--border);overflow:hidden;margin-bottom:14px;}
+.ps-hdr{padding:12px 16px;background:var(--gll);border-bottom:1px solid var(--border);}
+.ps-hdr-ttl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--g);}
+.ps-row{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--gll);}
+.ps-row:last-child{border-bottom:none;}
+.ps-key{font-size:12px;color:var(--muted);}
+.ps-val{font-size:13px;font-weight:600;color:var(--text);}
+.ps-edit{font-size:11px;font-weight:700;color:var(--g);background:none;border:none;cursor:pointer;font-family:inherit;}
+.danger-btn{width:100%;background:white;color:var(--red);border:1.5px solid var(--red);border-radius:12px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;}
+.danger-btn:hover{background:var(--redl);}
+
+/* ── CONFIRM MODAL ── */
+.confirm-modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,30,5,.65);z-index:500;align-items:center;justify-content:center;padding:24px;}
+.confirm-modal.open{display:flex;}
+.confirm-card{background:var(--cream);border-radius:16px;padding:24px;width:100%;max-width:380px;}
+.confirm-ic{font-size:32px;margin-bottom:10px;}
+.confirm-ttl{font-family:'Playfair Display',serif;font-size:18px;font-weight:800;color:var(--text);margin-bottom:6px;}
+.confirm-msg{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:20px;}
+.confirm-btns{display:flex;gap:10px;}
+.confirm-cancel{flex:1;background:white;color:var(--text);border:1.5px solid var(--border);border-radius:10px;padding:12px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;}
+.confirm-ok{flex:1;background:var(--red);color:white;border:none;border-radius:10px;padding:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;}
 </style>
 </head>
 <body>
 
 <div class="toast" id="toast"><span id="t-ic">✅</span><span id="t-txt">Done!</span></div>
 
-<div class="app-shell">
+<!-- ===== SIGN-IN / ONBOARDING ===== -->
+<div id="auth-wrap">
+
+  <!-- SIGN IN / CREATE ACCOUNT -->
+  <div class="auth-screen" id="auth-screen">
+    <div class="auth-logo">Soil Sista</div>
+    <div class="auth-tagline">Your grower assistant · Caribbean & SIDS</div>
+    <div class="auth-card">
+      <div class="auth-tab-row">
+        <button class="auth-tab active" id="atab-in" onclick="authTab('in')">Sign In</button>
+        <button class="auth-tab" id="atab-up" onclick="authTab('up')">Create Account</button>
+      </div>
+      <!-- Sign in -->
+      <div id="auth-signin">
+        <div class="field"><div class="flbl">Email</div><input class="fi" type="email" placeholder="your@email.com"></div>
+        <div class="field"><div class="flbl">Password</div><input class="fi" type="password" placeholder="••••••••"></div>
+        <button class="btn-p" onclick="doSignIn()">Sign In</button>
+        <div style="font-size:12px;color:var(--muted);text-align:center;margin-top:12px;cursor:pointer;">Forgot password?</div>
+      </div>
+      <!-- Create account -->
+      <div id="auth-signup" style="display:none">
+        <div class="field"><div class="flbl">Full name</div><input class="fi" id="su-name" type="text" placeholder="e.g. Jade Sands"></div>
+        <div class="field"><div class="flbl">Email</div><input class="fi" id="su-email" type="email" placeholder="your@email.com"></div>
+        <div class="field"><div class="flbl">Password</div><input class="fi" id="su-pw" type="password" placeholder="Min. 8 characters"></div>
+        <button class="btn-p" onclick="doSignUp()">Create Account & Set Up Farm →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ONBOARDING FLOW -->
+  <div class="auth-screen" id="onboarding-screen" style="display:none">
+    <div class="auth-card" style="padding-top:20px">
+      <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:800;color:var(--text);margin-bottom:4px;">Set up your farm</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:16px;">Just the essentials — takes under 2 minutes.</div>
+      <div class="ob-progress">
+        <div class="ob-dot done" id="od0"></div>
+        <div class="ob-dot" id="od1"></div>
+        <div class="ob-dot" id="od2"></div>
+        <div class="ob-dot" id="od3"></div>
+        <div class="ob-dot" id="od4"></div>
+      </div>
+
+      <!-- Step 0: Farm name + location -->
+      <div class="ob-step active" id="ob-0">
+        <div class="ob-ttl">What's your farm called?</div>
+        <div class="ob-sub">This appears on your dashboard and traceability records.</div>
+        <div class="field"><div class="flbl">Farm name</div><input class="fi" id="ob-farm-name" type="text" placeholder="e.g. Jade's Farm"></div>
+        <div class="field"><div class="flbl">Location / Island</div>
+          <select class="fi" id="ob-location">
+            <option value="">Select your island...</option>
+            <optgroup label="Bahamas"><option>Nassau / New Providence</option><option>Grand Bahama</option><option>Eleuthera</option><option>Exuma</option><option>Andros</option><option>Abaco</option><option>Long Island</option><option>Other Bahamas island</option></optgroup>
+            <optgroup label="Eastern Caribbean"><option>Antigua</option><option>Dominica</option><option>St. Lucia</option><option>Barbados</option><option>Trinidad</option><option>Grenada</option><option>St. Kitts & Nevis</option><option>St. Vincent</option></optgroup>
+            <optgroup label="Other SIDS"><option>Jamaica</option><option>Belize</option><option>Guyana</option><option>Other</option></optgroup>
+          </select>
+        </div>
+        <button class="btn-p" onclick="goOB(1)">Next →</button>
+      </div>
+
+      <!-- Step 1: Farm type -->
+      <div class="ob-step" id="ob-1">
+        <div class="ob-ttl">What type of operation?</div>
+        <div class="ob-sub">Select all that apply to how you grow.</div>
+        <div class="ob-options">
+          <button class="ob-opt" onclick="toggleOB(this)"><div class="ob-opt-nm">🌱 In-ground / conventional</div><div class="ob-opt-sb">Beds in natural soil</div></button>
+          <button class="ob-opt" onclick="toggleOB(this)"><div class="ob-opt-nm">🧱 Raised beds</div><div class="ob-opt-sb">Built-up bed structures</div></button>
+          <button class="ob-opt" onclick="toggleOB(this)"><div class="ob-opt-nm">💧 Hydroponics</div><div class="ob-opt-sb">Water-based growing systems</div></button>
+          <button class="ob-opt" onclick="toggleOB(this)"><div class="ob-opt-nm">🏠 Greenhouse / Shade house</div><div class="ob-opt-sb">Controlled environment</div></button>
+          <button class="ob-opt" onclick="toggleOB(this)"><div class="ob-opt-nm">🌿 Backyard / Home garden</div><div class="ob-opt-sb">Small personal production</div></button>
+          <button class="ob-opt" onclick="toggleOB(this)"><div class="ob-opt-nm">🔬 Hybrid / Mixed</div><div class="ob-opt-sb">Combination of methods</div></button>
+        </div>
+        <button class="btn-p" style="margin-top:14px" onclick="goOB(2)">Next →</button>
+        <button class="btn-s" onclick="goOB(0)">← Back</button>
+      </div>
+
+      <!-- Step 2: Soil type -->
+      <div class="ob-step" id="ob-2">
+        <div class="ob-ttl">What's your soil like?</div>
+        <div class="ob-sub">This shapes irrigation advice, amendment recommendations, and drainage alerts.</div>
+        <div class="ob-options">
+          <button class="ob-opt" onclick="selOB(this,'ob-soil')"><div class="ob-opt-nm">Sandy / Coralline</div><div class="ob-opt-sb">Common in the Bahamas · fast-draining · low nutrients</div></button>
+          <button class="ob-opt" onclick="selOB(this,'ob-soil')"><div class="ob-opt-nm">Sandy loam</div><div class="ob-opt-sb">Moderate drainage · moderate nutrients</div></button>
+          <button class="ob-opt" onclick="selOB(this,'ob-soil')"><div class="ob-opt-nm">Clay / Heavy</div><div class="ob-opt-sb">Slow drainage · nutrient-rich · compaction risk</div></button>
+          <button class="ob-opt" onclick="selOB(this,'ob-soil')"><div class="ob-opt-nm">Imported / Potting mix</div><div class="ob-opt-sb">Raised beds with purchased growing medium</div></button>
+          <button class="ob-opt" onclick="selOB(this,'ob-soil')"><div class="ob-opt-nm">Amended / Compost-rich</div><div class="ob-opt-sb">Actively built soil with organic matter</div></button>
+          <button class="ob-opt" onclick="selOB(this,'ob-soil')"><div class="ob-opt-nm">Not sure / Mixed</div><div class="ob-opt-sb">I'll update this after a soil test</div></button>
+        </div>
+        <input type="hidden" id="ob-soil" value="">
+        <button class="btn-p" style="margin-top:14px" onclick="goOB(3)">Next →</button>
+        <button class="btn-s" onclick="goOB(1)">← Back</button>
+      </div>
+
+      <!-- Step 3: Irrigation -->
+      <div class="ob-step" id="ob-3">
+        <div class="ob-ttl">How do you irrigate?</div>
+        <div class="ob-sub">Shapes spray timing advice and drought alerts.</div>
+        <div class="ob-options">
+          <button class="ob-opt" onclick="selOB(this,'ob-irr')"><div class="ob-opt-nm">💧 Drip irrigation</div><div class="ob-opt-sb">Low-volume · direct to roots</div></button>
+          <button class="ob-opt" onclick="selOB(this,'ob-irr')"><div class="ob-opt-nm">🌀 Sprinkler / Overhead</div><div class="ob-opt-sb">Spray irrigation system</div></button>
+          <button class="ob-opt" onclick="selOB(this,'ob-irr')"><div class="ob-opt-nm">🚿 Hand watering</div><div class="ob-opt-sb">Manual watering</div></button>
+          <button class="ob-opt" onclick="selOB(this,'ob-irr')"><div class="ob-opt-nm">🌧 Rainwater / Natural</div><div class="ob-opt-sb">Primarily rain-fed</div></button>
+          <button class="ob-opt" onclick="selOB(this,'ob-irr')"><div class="ob-opt-nm">🔀 Mixed methods</div><div class="ob-opt-sb">Combination depending on the bed</div></button>
+        </div>
+        <input type="hidden" id="ob-irr" value="">
+        <button class="btn-p" style="margin-top:14px" onclick="goOB(4)">Next →</button>
+        <button class="btn-s" onclick="goOB(2)">← Back</button>
+      </div>
+
+      <!-- Step 4: Farm size -->
+      <div class="ob-step" id="ob-4">
+        <div class="ob-ttl">How much space are you working with?</div>
+        <div class="ob-sub">Used to calculate space utilization on your dashboard. You can update this anytime.</div>
+        <div class="field"><div class="flbl">Total growing area</div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <input class="fi" id="ob-size" type="number" placeholder="e.g. 500" style="flex:1">
+            <select class="fi" id="ob-unit" style="width:80px"><option>ft²</option><option>acres</option><option>beds</option></select>
+          </div>
+        </div>
+        <div class="field"><div class="flbl">Primary growing goal</div>
+          <div class="ob-grid">
+            <button class="ob-opt" onclick="selOB(this,'ob-goal')"><div class="ob-opt-nm">🏪 Market sales</div></button>
+            <button class="ob-opt" onclick="selOB(this,'ob-goal')"><div class="ob-opt-nm">🍽 Restaurant supply</div></button>
+            <button class="ob-opt" onclick="selOB(this,'ob-goal')"><div class="ob-opt-nm">🏠 Home / family use</div></button>
+            <button class="ob-opt" onclick="selOB(this,'ob-goal')"><div class="ob-opt-nm">🤝 Community / CSA</div></button>
+          </div>
+          <input type="hidden" id="ob-goal" value="">
+        </div>
+        <button class="btn-p" onclick="finishOnboarding()">✓ Finish — Take me to my farm</button>
+        <button class="btn-s" onclick="goOB(3)">← Back</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end auth-wrap -->
+
+<div class="app-shell" id="main-app" style="display:none">
 
   <!-- SIDEBAR (desktop) -->
   <div class="sidebar">
@@ -396,6 +579,7 @@ html,body{height:100%;font-family:'DM Sans',system-ui,sans-serif;background:var(
       <button class="snav-btn" id="snb-log" onclick="switchTab('log')"><span class="snav-ic">📋</span>Log</button>
       <button class="snav-btn" id="snb-market" onclick="switchTab('market')"><span class="snav-ic">📈</span>Market</button>
       <button class="snav-btn" id="snb-tools" onclick="switchTab('tools')"><span class="snav-ic">🔬</span>Crop Doctor</button>
+      <button class="snav-btn" id="snb-profile" onclick="switchTab('profile')"><span class="snav-ic">👤</span>Profile</button>
     </div>
     <div class="sidebar-footer">
       <div class="sf-farm">Your farm</div>
@@ -477,8 +661,7 @@ html,body{height:100%;font-family:'DM Sans',system-ui,sans-serif;background:var(
           <button class="farm-qbtn" onclick="n('📷','Opening farm photos')"><span class="fq-ic">📷</span><div class="fq-nm">Farm Photos</div><div class="fq-sb">2 of 5 used (Pro)</div></button>
         </div>
         <div class="sec-hdr"><span class="sec-ttl">Bed Detail</span><button class="sec-lnk" onclick="openPlant()">+ Add</button></div>
-        <div class="bdc">
-          <div class="bdc-hdr"><span class="bdc-id">Bok Choy · 2 beds</span><span class="bdc-status st-h">Harvest Soon</span></div>
+        <div class="bdc" id="bdc-bokchoy"><span class="bdc-status st-h">Harvest Soon</span></div>
           <div class="bdc-body">
             <div class="bdc-crop">Bok Choy (Pac Choi)</div>
             <div class="bdc-var">Loose Leaf Brassica · Transplanted Mar 1 · DTM 35–45 days</div>
@@ -495,12 +678,12 @@ html,body{height:100%;font-family:'DM Sans',system-ui,sans-serif;background:var(
               <button class="bdc-btn bdc-prim" onclick="openQA('harvest')">Log Harvest</button>
               <button class="bdc-btn" onclick="switchTab('log')">View Log</button>
               <button class="bdc-btn" onclick="openPlantEdit('let_bokchoy','Bok Choy · 2 beds')">Edit</button>
+              <button class="bdc-btn" style="border-color:var(--red);color:var(--red);" onclick="confirmRemoveBed('Bok Choy · 2 beds','bdc-bokchoy')">Remove</button>
             </div>
             <button class="qr-btn" onclick="openQR('SS-BKCH-0301-247','Bok Choy — 2 beds','Mar 1, 2026')">📲 QR Code · Batch #SS-BKCH-0301-247</button>
           </div>
         </div>
-        <div class="bdc">
-          <div class="bdc-hdr"><span class="bdc-id">Tomato · 1 bed</span><span class="bdc-status st-g">Growing</span></div>
+        <div class="bdc" id="bdc-tomato"><span class="bdc-status st-g">Growing</span></div>
           <div class="bdc-body">
             <div class="bdc-crop">Tomato — Cherry Indeterminate</div>
             <div class="bdc-var">Solanaceae · Transplanted Feb 15 · DTM 60–75 days</div>
@@ -516,6 +699,7 @@ html,body{height:100%;font-family:'DM Sans',system-ui,sans-serif;background:var(
               <button class="bdc-btn bdc-prim" onclick="openQA('harvest')">Log Harvest</button>
               <button class="bdc-btn" onclick="switchTab('log')">View Log</button>
               <button class="bdc-btn" onclick="openPlantEdit('tomato_cherry_ind','Tomato · 1 bed')">Edit</button>
+              <button class="bdc-btn" style="border-color:var(--red);color:var(--red);" onclick="confirmRemoveBed('Tomato · 1 bed','bdc-tomato')">Remove</button>
             </div>
             <button class="qr-btn" onclick="openQR('SS-CHTO-0215-318','Tomato Cherry Indet. · 1 bed','Feb 15, 2026')">📲 QR Code · Batch #SS-CHTO-0215-318</button>
           </div>
@@ -621,20 +805,92 @@ html,body{height:100%;font-family:'DM Sans',system-ui,sans-serif;background:var(
       </div>
     </div>
 
-  </div><!-- end content-wrap -->
+    <!-- PROFILE -->
+    <div class="screen" id="screen-profile">
+      <div class="page-hdr"><div class="page-hdr-ttl">Profile & Farm Settings</div><div class="page-hdr-sub">Edit your details · manage your account</div></div>
+      <div class="page-body">
 
-  <!-- BOTTOM NAV (mobile) -->
+        <!-- Avatar + name -->
+        <div style="display:flex;flex-direction:column;align-items:center;padding:8px 0 20px;">
+          <div class="profile-avatar" id="prof-avatar">J</div>
+          <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:800;color:var(--text);" id="prof-name-display">Jade Sands</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:3px;" id="prof-email-display">jade@soilsista.com</div>
+        </div>
+
+        <!-- Personal info -->
+        <div class="profile-section">
+          <div class="ps-hdr"><div class="ps-hdr-ttl">Personal Info</div></div>
+          <div class="ps-row"><span class="ps-key">Full name</span><div style="display:flex;align-items:center;gap:10px;"><span class="ps-val" id="pv-name">Jade Sands</span><button class="ps-edit" onclick="editField('name','Full name','Jade Sands')">Edit</button></div></div>
+          <div class="ps-row"><span class="ps-key">Email</span><div style="display:flex;align-items:center;gap:10px;"><span class="ps-val" id="pv-email">jade@soilsista.com</span><button class="ps-edit" onclick="editField('email','Email','jade@soilsista.com')">Edit</button></div></div>
+          <div class="ps-row"><span class="ps-key">Phone</span><div style="display:flex;align-items:center;gap:10px;"><span class="ps-val" id="pv-phone">+1 242 000 0000</span><button class="ps-edit" onclick="editField('phone','Phone','+1 242 000 0000')">Edit</button></div></div>
+        </div>
+
+        <!-- Farm settings -->
+        <div class="profile-section">
+          <div class="ps-hdr"><div class="ps-hdr-ttl">Farm Settings</div></div>
+          <div class="ps-row"><span class="ps-key">Farm name</span><div style="display:flex;align-items:center;gap:10px;"><span class="ps-val" id="pv-farm">Jade's Farm</span><button class="ps-edit" onclick="editField('farm','Farm name','Jade\'s Farm')">Edit</button></div></div>
+          <div class="ps-row"><span class="ps-key">Location</span><div style="display:flex;align-items:center;gap:10px;"><span class="ps-val" id="pv-loc">Nassau / New Providence</span><button class="ps-edit" onclick="editField('loc','Location','Nassau / New Providence')">Edit</button></div></div>
+          <div class="ps-row"><span class="ps-key">Farm type</span><div style="display:flex;align-items:center;gap:10px;"><span class="ps-val" id="pv-type">Raised beds · In-ground</span><button class="ps-edit" onclick="n('✏️','Redirecting to farm type setup...')">Edit</button></div></div>
+          <div class="ps-row"><span class="ps-key">Soil type</span><div style="display:flex;align-items:center;gap:10px;"><span class="ps-val" id="pv-soil">Sandy / Coralline</span><button class="ps-edit" onclick="editField('soil','Soil type','Sandy / Coralline')">Edit</button></div></div>
+          <div class="ps-row"><span class="ps-key">Irrigation</span><div style="display:flex;align-items:center;gap:10px;"><span class="ps-val" id="pv-irr">Drip irrigation</span><button class="ps-edit" onclick="editField('irr','Irrigation method','Drip irrigation')">Edit</button></div></div>
+          <div class="ps-row"><span class="ps-key">Growing area</span><div style="display:flex;align-items:center;gap:10px;"><span class="ps-val" id="pv-size">500 ft²</span><button class="ps-edit" onclick="editField('size','Growing area','500 ft²')">Edit</button></div></div>
+        </div>
+
+        <!-- Account -->
+        <div class="profile-section">
+          <div class="ps-hdr"><div class="ps-hdr-ttl">Account</div></div>
+          <div class="ps-row"><span class="ps-key">Plan</span><span class="ps-val" style="color:var(--g);">Pro ✓</span></div>
+          <div class="ps-row"><span class="ps-key">Password</span><div style="display:flex;align-items:center;gap:10px;"><span class="ps-val">••••••••</span><button class="ps-edit" onclick="n('🔐','Password reset email sent!')">Change</button></div></div>
+          <div class="ps-row"><span class="ps-key">Sign out</span><button class="ps-edit" onclick="confirmAction('sign-out','Sign out?','You will be returned to the sign-in screen.','Sign out',function(){signOut();})">Sign out</button></div>
+        </div>
+
+        <!-- Danger zone -->
+        <div style="margin-top:4px;margin-bottom:24px;">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--red);margin-bottom:10px;">Danger Zone</div>
+          <button class="danger-btn" onclick="confirmAction('delete-account','Delete account?','This will permanently delete your farm data, all plantings, logs, and traceability records. This cannot be undone.','Delete my account',function(){n('🗑','Account deletion requested. Check your email to confirm.');})">Delete my account</button>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- end content-wrap -->
   <div class="bottom-nav">
     <button class="nb active" id="nb-home" onclick="switchTab('home')"><span class="nb-ic">🏡</span>Home</button>
     <button class="nb" id="nb-farm" onclick="switchTab('farm')"><span class="nb-ic">🌱</span>Farm</button>
     <button class="nb" id="nb-log" onclick="switchTab('log')"><span class="nb-ic">📋</span>Log</button>
     <button class="nb" id="nb-market" onclick="switchTab('market')"><span class="nb-ic">📈</span>Market</button>
     <button class="nb" id="nb-tools" onclick="switchTab('tools')"><span class="nb-ic">🔬</span>Tools</button>
+    <button class="nb" id="nb-profile" onclick="switchTab('profile')"><span class="nb-ic">👤</span>Profile</button>
   </div>
 
 </div><!-- end app-shell -->
 
-<!-- ===== PLANTING MODAL ===== -->
+<!-- ===== CONFIRM MODAL ===== -->
+<div class="confirm-modal" id="modal-confirm">
+  <div class="confirm-card">
+    <div class="confirm-ic" id="conf-ic">⚠️</div>
+    <div class="confirm-ttl" id="conf-ttl">Are you sure?</div>
+    <div class="confirm-msg" id="conf-msg">This action cannot be undone.</div>
+    <div class="confirm-btns">
+      <button class="confirm-cancel" onclick="document.getElementById('modal-confirm').classList.remove('open')">Cancel</button>
+      <button class="confirm-ok" id="conf-ok">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== EDIT FIELD MODAL ===== -->
+<div class="confirm-modal" id="modal-edit-field">
+  <div class="confirm-card">
+    <div class="confirm-ttl" id="ef-ttl">Edit</div>
+    <div style="margin:12px 0 20px;">
+      <input class="fi" id="ef-input" type="text" placeholder="">
+    </div>
+    <div class="confirm-btns">
+      <button class="confirm-cancel" onclick="document.getElementById('modal-edit-field').classList.remove('open')">Cancel</button>
+      <button class="confirm-ok" style="background:var(--g);" id="ef-save">Save</button>
+    </div>
+  </div>
+</div>
 <div class="modal-ov" id="modal-plant">
   <div class="modal-sheet">
     <div class="mhd"></div>
@@ -895,11 +1151,51 @@ var DB = {
 
 var ORGANIC=['neem','compost','bt ','bacillus','trichoderma','copper sulfate','spinosad','bicarbonate','hydrogen peroxide','h2o2','fish emulsion','seaweed','kelp','bone meal','blood meal','feather meal','wood ash','greensand','epsom','chamomile','cinnamon','sulfur','mycorrhiz','worm castings','molasses'];
 var SYNTH=['npk ','synthetic','malathion','chlorpyrifos','imidacloprid','glyphosate','roundup','mancozeb','dimethoate','2,4-d'];
-var TABS=['home','farm','log','market','tools'];
+var TABS=['home','farm','log','market','tools','profile'];
 var curMethod='buy';
 var selKey='';
 var selSpacing='optimal';
 var spData={};
+
+// ======= AUTH & ONBOARDING =======
+function authTab(tab){
+  document.getElementById('atab-in').classList.toggle('active',tab==='in');
+  document.getElementById('atab-up').classList.toggle('active',tab==='up');
+  document.getElementById('auth-signin').style.display=tab==='in'?'block':'none';
+  document.getElementById('auth-signup').style.display=tab==='up'?'block':'none';
+}
+function doSignIn(){
+  // Demo: skip straight to app
+  document.getElementById('auth-wrap').style.display='none';
+  document.getElementById('main-app').style.display='flex';
+}
+function doSignUp(){
+  var name=document.getElementById('su-name').value.trim();
+  if(!name){n('⚠','Enter your name first');return;}
+  document.getElementById('auth-screen').style.display='none';
+  document.getElementById('onboarding-screen').style.display='flex';
+}
+function goOB(step){
+  document.querySelectorAll('.ob-step').forEach(function(s,i){s.classList.toggle('active',i===step);});
+  for(var i=0;i<5;i++){var d=document.getElementById('od'+i);if(d)d.classList.toggle('done',i<=step);}
+}
+function toggleOB(el){el.classList.toggle('sel');}
+function selOB(el,hidId){
+  el.parentElement.querySelectorAll('.ob-opt').forEach(function(o){o.classList.remove('sel');});
+  el.classList.add('sel');
+  var hid=document.getElementById(hidId);if(hid)hid.value=el.querySelector('.ob-opt-nm').textContent;
+}
+function finishOnboarding(){
+  document.getElementById('auth-wrap').style.display='none';
+  document.getElementById('main-app').style.display='flex';
+}
+function signOut(){
+  document.getElementById('main-app').style.display='none';
+  document.getElementById('auth-wrap').style.display='block';
+  document.getElementById('auth-screen').style.display='flex';
+  document.getElementById('onboarding-screen').style.display='none';
+  authTab('in');
+}
 
 // ======= TAB SWITCHING =======
 function switchTab(name){
@@ -912,6 +1208,44 @@ function switchTab(name){
     if(snb) snb.classList.toggle('active',t===name);
   });
   if(name==='tools') showTree('home');
+}
+
+// ======= CONFIRM ACTION ===
+function confirmAction(type,ttl,msg,okLabel,cb){
+  var icons={remove:'🗑','sign-out':'👋','delete-account':'⚠️'};
+  document.getElementById('conf-ic').textContent=icons[type]||'⚠️';
+  document.getElementById('conf-ttl').textContent=ttl;
+  document.getElementById('conf-msg').textContent=msg;
+  var okBtn=document.getElementById('conf-ok');
+  okBtn.textContent=okLabel;
+  okBtn.onclick=function(){document.getElementById('modal-confirm').classList.remove('open');if(cb)cb();};
+  document.getElementById('modal-confirm').classList.add('open');
+}
+function confirmRemoveBed(label,elId){
+  confirmAction('remove','Remove '+label+'?','This will archive all history for this bed. Logs, batches and spray records remain in your history. Bed removed from active tracking.','Yes, remove bed',function(){
+    var el=document.getElementById(elId);
+    if(el) el.style.display='none';
+    n('🗑',label+' removed from active beds. History preserved.');
+  });
+}
+
+// ======= PROFILE EDIT =======
+function editField(key,label,current){
+  document.getElementById('ef-ttl').textContent='Edit '+label;
+  var inp=document.getElementById('ef-input');
+  inp.value=current;
+  inp.focus();
+  document.getElementById('ef-save').onclick=function(){
+    var val=inp.value.trim();
+    if(!val){n('⚠','Field cannot be empty');return;}
+    var targets={name:['pv-name','prof-name-display'],email:['pv-email','prof-email-display'],phone:['pv-phone'],farm:['pv-farm'],loc:['pv-loc'],soil:['pv-soil'],irr:['pv-irr'],size:['pv-size']};
+    if(targets[key]) targets[key].forEach(function(id){var el=document.getElementById(id);if(el)el.textContent=val;});
+    // Update avatar initial if name changed
+    if(key==='name'&&val.length>0){var av=document.getElementById('prof-avatar');if(av)av.textContent=val[0].toUpperCase();}
+    document.getElementById('modal-edit-field').classList.remove('open');
+    n('💾',label+' updated!');
+  };
+  document.getElementById('modal-edit-field').classList.add('open');
 }
 
 function n(ic,txt){
